@@ -23,5 +23,27 @@ namespace TMP.DAL.Repositories
         {
             return Context.Set<ExerciseSession>().FirstOrDefault(session => session.ExerciseSessionId == id);
         }
+
+        public override void Create(ExerciseSession entity)
+        {            
+            base.Create(entity);
+            // Ensure that ExerciseType objects are not added anew every time            
+            //foreach (var set in entity.ExerciseSets)
+            //{
+            //    if (set.ExerciseType != null && set.ExerciseType.ExerciseTypeId > 0)
+            //        Context.Entry(set.ExerciseType).State = EntityState.Unchanged;
+            //}
+        }
+
+        public override void Update(ExerciseSession entity)
+        {
+            base.Update(entity);
+            // Ensure that ExerciseType objects are not added anew every time
+            //foreach (var set in entity.ExerciseSets)
+            //{
+            //    if (set.ExerciseType != null && set.ExerciseType.ExerciseTypeId > 0)
+            //        Context.Entry(set.ExerciseType).State = EntityState.Unchanged;
+            //}
+        }
     }
 }

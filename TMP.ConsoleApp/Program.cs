@@ -13,92 +13,96 @@ namespace TMP.ConsoleApp
     {
         static void Main(string[] args)
         {
+            var ex = (new ExerciseTypeRepository()).Read(12);
+            var repo = new ExerciseSessionRepository();
 
-            //var exerciseTypeRepo = new ExerciseTypeRepository();
-
-            //var exc = new ExerciseType
-            //{
-            //    Created = DateTime.Now,
-            //    CreatedBy = null,
-            //    ExerciseName = "Test",
-            //    MetricType = Domain.Entities.MetricType.REP,
-            //    Modified = DateTime.Now
-            //};
-
-            //exerciseTypeRepo.Create(exc);
-            //exerciseTypeRepo.Save();
-
-            var ex = (new ExerciseTypeRepository()).Read(1);
-
-            //var sesion = new ExerciseSession
+            //var session = new ExerciseSession
             //{
             //    Created = DateTime.Now,
             //    Modified = DateTime.Now,
-            //    User = null,
-            //    Start = DateTime.Now,
-            //    Stop = DateTime.Now
-            //};
-            //var set = new ExerciseSet
-            //{
-            //    Created = DateTime.Now,
-            //    Modified = DateTime.Now,
-            //    ExerciseType = ex,
             //    Start = DateTime.Now,
             //    Stop = DateTime.Now,
-            //    ExerciseSession = sesion
+            //    User = null,
+            //    ExerciseSets = new List<ExerciseSet>
+            //    {
+            //        new ExerciseSet
+            //        {
+            //            Created = DateTime.Now,
+            //            Exercises = new List<Exercise>
+            //            {
+            //                new Exercise
+            //                {
+            //                    Performed = DateTime.Now,
+            //                    Metric = new WeightMetric
+            //                    {
+            //                        Number = 12,
+            //                        WeightKG = 40
+            //                    }
+            //                }
+            //            },
+            //            Start = DateTime.Now,
+            //            Stop = DateTime.Now,
+            //            Modified = DateTime.Now,
+            //            ExerciseType = new ExerciseType
+            //            {
+            //                Created = DateTime.Now,
+            //                CreatedBy = null,
+            //                ExerciseName = "Overhead Press",
+            //                MetricType = Domain.Entities.MetricType.WEIGHT,
+            //                Modified = DateTime.Now
+            //            },
+            //        }
+            //    },
             //};
-            //var exercise = new Exercise
+
+
+            //repo.Create(session);
+            //repo.Save();
+
+            //var se = repo.Read(3);
+
+            //se.ExerciseSets.Add(new ExerciseSet
             //{
-            //    Performed = DateTime.Now,
-            //    ExerciseSet = set                
-            //};            
-            //exercise.Metric = new WeightMetric
-            //{
-            //    Exercise = exercise,
-            //    Number = 10,
-            //    WeightKG = 10
-            //};
-            //set.Exercises = new List<Exercise> { exercise };
-            //sesion.ExerciseSets = new List<ExerciseSet> { set };
+            //    Created = DateTime.Now,
+            //    //ExerciseType = new ExerciseType
+            //    //{
+            //    //    Created = DateTime.Now,
+            //    //    CreatedBy = null,
+            //    //    ExerciseName = "Squats",
+            //    //    MetricType = Domain.Entities.MetricType.WEIGHT,
+            //    //    Modified = DateTime.Now
+            //    //},
+            //    ExerciseTypeId = ex.ExerciseTypeId,
+            //    Modified = DateTime.Now,
+            //    Start = DateTime.Now,
+            //    Stop = DateTime.Now,
+            //    Exercises = new List<Exercise>
+            //    {
+            //        new Exercise
+            //        {
+            //            Performed = DateTime.Now,
+            //            Metric = new WeightMetric
+            //            {
+            //                Number = 16,
+            //                WeightKG = 80
+            //            }
+            //        },
+            //        new Exercise
+            //        {
+            //            Performed = DateTime.Now,
+            //            Metric = new WeightMetric
+            //            {
+            //                Number = 16,
+            //                WeightKG = 80
+            //            }
+            //        },
+            //    }
+            //});
 
+            //repo.Update(se);
+            //repo.Save();
 
-            var session = new ExerciseSession
-            {
-                Created = DateTime.Now,
-                Modified = DateTime.Now,
-                Start = DateTime.Now,
-                Stop = DateTime.Now,
-                User = null,
-                ExerciseSets = new List<ExerciseSet>
-                {
-                    new ExerciseSet
-                    {
-                        Created = DateTime.Now,
-                        Exercises = new List<Exercise>
-                        {
-                            new Exercise
-                            {
-                                Performed = DateTime.Now,
-                                Metric = new WeightMetric
-                                {
-                                    Number = 12,
-                                    WeightKG = 40
-                                }
-                            }
-                        },
-                        Start = DateTime.Now,
-                        Stop = DateTime.Now,
-                        Modified = DateTime.Now,
-                        ExerciseType = ex
-                    }
-                },
-            };
-
-            var repo = new ExerciseSessionRepository();
-            repo.Create(session);
-            repo.Save();
-
-            var se = repo.Read(2);
+            var se2 = repo.Read(3);
 
             Console.Write("Hello");
             Console.Read();

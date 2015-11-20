@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201511200813545_ChangedNavigational.Designer.cs">
       <DependentUpon>201511200813545_ChangedNavigational.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.cs" />
+    <Compile Include="Migrations\201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.Designer.cs">
+      <DependentUpon>201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ExerciseRepository.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511200813545_ChangedNavigational.resx">
       <DependentUpon>201511200813545_ChangedNavigational.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.resx">
+      <DependentUpon>201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

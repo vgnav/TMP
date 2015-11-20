@@ -11,7 +11,8 @@
         [ForeignKey("ExerciseSession")]
         public int ExerciseSessionId { get; set; }
         public virtual ExerciseSession ExerciseSession { get; set; }
-
+                
+        public int ExerciseTypeId { get; set; }
         public virtual ExerciseType ExerciseType { get; set; }
 
         public virtual List<Exercise> Exercises { get; set; }        
