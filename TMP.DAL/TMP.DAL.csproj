@@ -49,9 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201511200458047_InitialCreate.cs" />
+    <Compile Include="Migrations\201511200458047_InitialCreate.Designer.cs">
+      <DependentUpon>201511200458047_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ExerciseRepository.cs" />
+    <Compile Include="Repositories\ExerciseSessionRepository.cs" />
+    <Compile Include="Repositories\ExerciseSetRepository.cs" />
     <Compile Include="Repositories\ExerciseTypeRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\MetricsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -62,6 +71,11 @@
       <Project>{96e684c3-d3f2-4fa5-ac3a-a8c3576ef1cf}</Project>
       <Name>TMP.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511200458047_InitialCreate.resx">
+      <DependentUpon>201511200458047_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,7 @@ namespace TMP.DAL.Repositories
 
     public class ExerciseTypeContext : DbContext
     {
-        public ExerciseTypeContext() : base("ExerciseTypeContext")
+        public ExerciseTypeContext() : base("TMPApp")
         { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
