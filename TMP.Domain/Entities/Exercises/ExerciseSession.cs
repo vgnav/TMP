@@ -8,7 +8,7 @@
     {
         public int ExerciseSessionId { get; set; }
         public User User { get; set; }
-        public List<ExerciseSet> ExerciseSets { get; set; }
+        public virtual List<ExerciseSet> ExerciseSets { get; set; }
 
         public DateTime Start { get; set; }
         public DateTime Stop { get; set; }

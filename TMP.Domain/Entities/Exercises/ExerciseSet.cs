@@ -9,7 +9,8 @@
         public int ExerciseSessionId { get; set; }
         
         public ExerciseType ExerciseType { get; set; }
-        public List<Exercise> Exercises { get; set; }
+        public virtual List<Exercise> Exercises { get; set; }
+        public virtual ExerciseSession ExerciseSession { get; set; }
 
         public DateTime Start { get; set; }
         public DateTime Stop { get; set; }
