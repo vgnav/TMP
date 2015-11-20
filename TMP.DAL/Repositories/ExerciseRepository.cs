@@ -4,9 +4,9 @@
     using Domain.Entities.Exercises;
     using System.Linq;
 
-    public class ExerciseContext : DbContext
+    internal class ExerciseContext : DbContext
     {
-        public ExerciseContext() : base("TMPApp")
+        internal ExerciseContext(string connectionString) : base(connectionString)
         { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -15,8 +15,13 @@
         }
     }
 
-    public class ExerciseRepository : GenericRepository<ExerciseContext, Exercise>
+    public class ExerciseRepository : BaseRepository<Exercise>
     {
+        public ExerciseRepository(string connectionString)
+        {
+            Context = new ExerciseContext(connectionString);
+        }
+
         public override Exercise Read(int id)
         {
             return Context.Set<Exercise>().FirstOrDefault(exercise => exercise.ExerciseId == id);

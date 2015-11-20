@@ -5,11 +5,10 @@ namespace TMP.DAL.Repositories
     using Domain.Entities.Exercises;
     using System.Linq;
 
-    public class ExerciseSetContext : DbContext
+    internal class ExerciseSetContext : DbContext
     {
-        public ExerciseSetContext() : base("TMPApp")
-        {
-        }
+        public ExerciseSetContext(string connectionString) : base(connectionString)
+        { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -17,8 +16,13 @@ namespace TMP.DAL.Repositories
         }
     }
 
-    public class ExerciseSetRepository : GenericRepository<ExerciseSetContext, ExerciseSet>    
+    public class ExerciseSetRepository : BaseRepository<ExerciseSet>    
     {
+        public ExerciseSetRepository(string connectionString)
+        {
+            Context = new ExerciseSetContext(connectionString);
+        }
+
         public override ExerciseSet Read(int id)
         {
             return Context.Set<ExerciseSet>().FirstOrDefault(exerciseSet => exerciseSet.ExerciseSetId == id);

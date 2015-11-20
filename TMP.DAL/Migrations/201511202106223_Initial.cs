@@ -3,7 +3,7 @@ namespace TMP.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -28,17 +28,17 @@ namespace TMP.DAL.Migrations
                     {
                         ExerciseSetId = c.Int(nullable: false, identity: true),
                         ExerciseSessionId = c.Int(nullable: false),
+                        ExerciseTypeId = c.Int(nullable: false),
                         Start = c.DateTime(nullable: false),
                         Stop = c.DateTime(nullable: false),
                         Created = c.DateTime(nullable: false),
                         Modified = c.DateTime(nullable: false),
-                        ExerciseType_ExerciseTypeId = c.Int(),
                     })
                 .PrimaryKey(t => t.ExerciseSetId)
                 .ForeignKey("dbo.ExerciseSessions", t => t.ExerciseSessionId, cascadeDelete: true)
-                .ForeignKey("dbo.ExerciseTypes", t => t.ExerciseType_ExerciseTypeId)
+                .ForeignKey("dbo.ExerciseTypes", t => t.ExerciseTypeId, cascadeDelete: true)
                 .Index(t => t.ExerciseSessionId)
-                .Index(t => t.ExerciseType_ExerciseTypeId);
+                .Index(t => t.ExerciseTypeId);
             
             CreateTable(
                 "dbo.Exercises",
@@ -46,14 +46,14 @@ namespace TMP.DAL.Migrations
                     {
                         ExerciseId = c.Int(nullable: false, identity: true),
                         ExerciseSetId = c.Int(nullable: false),
+                        MetricId = c.Int(nullable: false),
                         Performed = c.DateTime(nullable: false),
-                        Metric_MetricId = c.Int(),
                     })
                 .PrimaryKey(t => t.ExerciseId)
                 .ForeignKey("dbo.ExerciseSets", t => t.ExerciseSetId, cascadeDelete: true)
-                .ForeignKey("dbo.BaseMetrics", t => t.Metric_MetricId)
+                .ForeignKey("dbo.BaseMetrics", t => t.MetricId, cascadeDelete: true)
                 .Index(t => t.ExerciseSetId)
-                .Index(t => t.Metric_MetricId);
+                .Index(t => t.MetricId);
             
             CreateTable(
                 "dbo.BaseMetrics",
@@ -107,15 +107,15 @@ namespace TMP.DAL.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.ExerciseSessions", "User_UserId", "dbo.Users");
-            DropForeignKey("dbo.ExerciseSets", "ExerciseType_ExerciseTypeId", "dbo.ExerciseTypes");
+            DropForeignKey("dbo.ExerciseSets", "ExerciseTypeId", "dbo.ExerciseTypes");
             DropForeignKey("dbo.ExerciseTypes", "CreatedBy_UserId", "dbo.Users");
             DropForeignKey("dbo.ExerciseSets", "ExerciseSessionId", "dbo.ExerciseSessions");
-            DropForeignKey("dbo.Exercises", "Metric_MetricId", "dbo.BaseMetrics");
+            DropForeignKey("dbo.Exercises", "MetricId", "dbo.BaseMetrics");
             DropForeignKey("dbo.Exercises", "ExerciseSetId", "dbo.ExerciseSets");
             DropIndex("dbo.ExerciseTypes", new[] { "CreatedBy_UserId" });
-            DropIndex("dbo.Exercises", new[] { "Metric_MetricId" });
+            DropIndex("dbo.Exercises", new[] { "MetricId" });
             DropIndex("dbo.Exercises", new[] { "ExerciseSetId" });
-            DropIndex("dbo.ExerciseSets", new[] { "ExerciseType_ExerciseTypeId" });
+            DropIndex("dbo.ExerciseSets", new[] { "ExerciseTypeId" });
             DropIndex("dbo.ExerciseSets", new[] { "ExerciseSessionId" });
             DropIndex("dbo.ExerciseSessions", new[] { "User_UserId" });
             DropTable("dbo.Users");

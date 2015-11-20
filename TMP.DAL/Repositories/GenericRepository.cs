@@ -6,12 +6,13 @@
     using System.Linq.Expressions;
     using TMP.Domain.Interfaces;
 
-    public class GenericRepository<C, T> : IRepository<T>
+    [Obsolete("Marked as Obsolete because C has to be public and parameterless - use BaseRepository instead")]
+    public class GenericRepository<C, T> : IRepository<T>, IDisposable
         where T : class
         where C : DbContext, new()
     {
         private C _entities = new C();
-        public C Context
+        protected C Context
         {
             get { return _entities; }
             set { _entities = value; }
@@ -52,6 +53,11 @@
         public virtual void Update(T entity)
         {
             _entities.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Dispose()
+        {
+            _entities.Dispose();
         }
 
         #endregion

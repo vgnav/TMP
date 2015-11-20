@@ -49,30 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201511200712123_InitialCreate.cs" />
-    <Compile Include="Migrations\201511200712123_InitialCreate.Designer.cs">
-      <DependentUpon>201511200712123_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511200810270_ChangedMetric.cs" />
-    <Compile Include="Migrations\201511200810270_ChangedMetric.Designer.cs">
-      <DependentUpon>201511200810270_ChangedMetric.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511200813545_ChangedNavigational.cs" />
-    <Compile Include="Migrations\201511200813545_ChangedNavigational.Designer.cs">
-      <DependentUpon>201511200813545_ChangedNavigational.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.cs" />
-    <Compile Include="Migrations\201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.Designer.cs">
-      <DependentUpon>201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.cs</DependentUpon>
+    <Compile Include="Migrations\201511202106223_Initial.cs" />
+    <Compile Include="Migrations\201511202106223_Initial.Designer.cs">
+      <DependentUpon>201511202106223_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\ExerciseRepository.cs" />
     <Compile Include="Repositories\ExerciseSessionRepository.cs" />
     <Compile Include="Repositories\ExerciseSetRepository.cs" />
     <Compile Include="Repositories\ExerciseTypeRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\MetricsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,17 +73,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511200712123_InitialCreate.resx">
-      <DependentUpon>201511200712123_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511200810270_ChangedMetric.resx">
-      <DependentUpon>201511200810270_ChangedMetric.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511200813545_ChangedNavigational.resx">
-      <DependentUpon>201511200813545_ChangedNavigational.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.resx">
-      <DependentUpon>201511200921045_AddedForeignKeyForExerciseTypeInExerciseSet.cs</DependentUpon>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511202106223_Initial.resx">
+      <DependentUpon>201511202106223_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
