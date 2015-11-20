@@ -81,8 +81,8 @@ namespace TMP.ConsoleApp
                                 Performed = DateTime.Now,
                                 Metric = new WeightMetric
                                 {
-                                    Number = 10,
-                                    WeightKG = 10
+                                    Number = 12,
+                                    WeightKG = 40
                                 }
                             }
                         },
@@ -95,8 +95,8 @@ namespace TMP.ConsoleApp
             };
 
             var repo = new ExerciseSessionRepository();
-            //repo.Create(session);
-            //repo.Save();
+            repo.Create(session);
+            repo.Save();
 
             var se = repo.Read(2);
 

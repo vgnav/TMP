@@ -6,9 +6,11 @@
 
     public abstract class BaseMetric
     {   
-        [Key, ForeignKey("Exercise")]             
+        //[Key, ForeignKey("Exercise")]             
+        [Key]
         public int MetricId { get; set; }        
-        public int ExerciseId { get; set; }        
-        public virtual Exercise Exercise { get; set; } 
+
+        //public int ExerciseId { get; set; }        
+        //public virtual Exercise Exercise { get; set; } 
     }
 }

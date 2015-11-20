@@ -7,13 +7,13 @@ namespace TMP.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class ChangedNavigational : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedNavigational));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511200458047_InitialCreate"; }
+            get { return "201511200813545_ChangedNavigational"; }
         }
         
         string IMigrationMetadata.Source

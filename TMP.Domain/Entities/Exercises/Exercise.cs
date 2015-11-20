@@ -11,7 +11,7 @@
         [ForeignKey("ExerciseSet")]
         public int ExerciseSetId { get; set; }
         public virtual ExerciseSet ExerciseSet { get; set; }
-
+                
         public int MetricId { get; set; }
         public virtual BaseMetric Metric { get; set; }
 

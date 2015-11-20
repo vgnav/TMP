@@ -46,19 +46,20 @@ namespace TMP.DAL.Migrations
                     {
                         ExerciseId = c.Int(nullable: false, identity: true),
                         ExerciseSetId = c.Int(nullable: false),
-                        MetricId = c.Int(nullable: false),
                         Performed = c.DateTime(nullable: false),
+                        Metric_MetricId = c.Int(),
                     })
                 .PrimaryKey(t => t.ExerciseId)
                 .ForeignKey("dbo.ExerciseSets", t => t.ExerciseSetId, cascadeDelete: true)
-                .Index(t => t.ExerciseSetId);
+                .ForeignKey("dbo.BaseMetrics", t => t.Metric_MetricId)
+                .Index(t => t.ExerciseSetId)
+                .Index(t => t.Metric_MetricId);
             
             CreateTable(
                 "dbo.BaseMetrics",
                 c => new
                     {
-                        MetricId = c.Int(nullable: false),
-                        ExerciseId = c.Int(nullable: false),
+                        MetricId = c.Int(nullable: false, identity: true),
                         CaloriesBurnt = c.Decimal(precision: 18, scale: 2),
                         Distance = c.Int(),
                         MilliSeconds = c.Long(),
@@ -66,9 +67,7 @@ namespace TMP.DAL.Migrations
                         WeightKG = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.MetricId)
-                .ForeignKey("dbo.Exercises", t => t.MetricId)
-                .Index(t => t.MetricId);
+                .PrimaryKey(t => t.MetricId);
             
             CreateTable(
                 "dbo.ExerciseTypes",
@@ -111,10 +110,10 @@ namespace TMP.DAL.Migrations
             DropForeignKey("dbo.ExerciseSets", "ExerciseType_ExerciseTypeId", "dbo.ExerciseTypes");
             DropForeignKey("dbo.ExerciseTypes", "CreatedBy_UserId", "dbo.Users");
             DropForeignKey("dbo.ExerciseSets", "ExerciseSessionId", "dbo.ExerciseSessions");
-            DropForeignKey("dbo.BaseMetrics", "MetricId", "dbo.Exercises");
+            DropForeignKey("dbo.Exercises", "Metric_MetricId", "dbo.BaseMetrics");
             DropForeignKey("dbo.Exercises", "ExerciseSetId", "dbo.ExerciseSets");
             DropIndex("dbo.ExerciseTypes", new[] { "CreatedBy_UserId" });
-            DropIndex("dbo.BaseMetrics", new[] { "MetricId" });
+            DropIndex("dbo.Exercises", new[] { "Metric_MetricId" });
             DropIndex("dbo.Exercises", new[] { "ExerciseSetId" });
             DropIndex("dbo.ExerciseSets", new[] { "ExerciseType_ExerciseTypeId" });
             DropIndex("dbo.ExerciseSets", new[] { "ExerciseSessionId" });

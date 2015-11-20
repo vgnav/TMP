@@ -49,9 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201511200458047_InitialCreate.cs" />
-    <Compile Include="Migrations\201511200458047_InitialCreate.Designer.cs">
-      <DependentUpon>201511200458047_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201511200712123_InitialCreate.cs" />
+    <Compile Include="Migrations\201511200712123_InitialCreate.Designer.cs">
+      <DependentUpon>201511200712123_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511200810270_ChangedMetric.cs" />
+    <Compile Include="Migrations\201511200810270_ChangedMetric.Designer.cs">
+      <DependentUpon>201511200810270_ChangedMetric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511200813545_ChangedNavigational.cs" />
+    <Compile Include="Migrations\201511200813545_ChangedNavigational.Designer.cs">
+      <DependentUpon>201511200813545_ChangedNavigational.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,8 +81,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511200458047_InitialCreate.resx">
-      <DependentUpon>201511200458047_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511200712123_InitialCreate.resx">
+      <DependentUpon>201511200712123_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511200810270_ChangedMetric.resx">
+      <DependentUpon>201511200810270_ChangedMetric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511200813545_ChangedNavigational.resx">
+      <DependentUpon>201511200813545_ChangedNavigational.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
