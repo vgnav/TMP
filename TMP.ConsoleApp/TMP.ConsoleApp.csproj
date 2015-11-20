@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{96E684C3-D3F2-4FA5-AC3A-A8C3576EF1CF}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{9D760362-9C83-4F98-B529-100C0080B9E6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TMP.Domain</RootNamespace>
-    <AssemblyName>TMP.Domain</AssemblyName>
+    <RootNamespace>TMP.ConsoleApp</RootNamespace>
+    <AssemblyName>TMP.ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -49,26 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Metrics\BaseMetric.cs" />
-    <Compile Include="Entities\Metrics\CardioMetric.cs" />
-    <Compile Include="Entities\Metrics\DistanceMetric.cs" />
-    <Compile Include="Entities\Enums.cs" />
-    <Compile Include="Entities\Exercises\Exercise.cs" />
-    <Compile Include="Entities\Exercises\ExerciseSession.cs" />
-    <Compile Include="Entities\Exercises\ExerciseSet.cs" />
-    <Compile Include="Entities\Exercises\ExerciseType.cs" />
-    <Compile Include="Entities\Metrics\RepMetric.cs" />
-    <Compile Include="Entities\Metrics\TimeMetric.cs" />
-    <Compile Include="Entities\Identity\User.cs" />
-    <Compile Include="Entities\Metrics\WeightMetric.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TMP.DAL\TMP.DAL.csproj">
+      <Project>{97dbd15f-ca68-48fb-8306-4b3f661d1f61}</Project>
+      <Name>TMP.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMP.Domain\TMP.Domain.csproj">
+      <Project>{96e684c3-d3f2-4fa5-ac3a-a8c3576ef1cf}</Project>
+      <Name>TMP.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
