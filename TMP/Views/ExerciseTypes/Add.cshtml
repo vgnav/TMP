@@ -18,63 +18,61 @@
     <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
 
     <div class="field">
-        <div class="label">
-            <label for="name">Workout name</label>
-        </div>
         <div class="value">
-            <input type="text" id="name" data-bind="textInput: exerciseName"/>
+            <input type="text" id="name" data-bind="textInput: exerciseName" placeholder="Workout name"/>
         </div>        
     </div>
 
-    <div class="field">
+    <div class="field" data-bind="visible: exerciseName()">
         <div class="label">
             <label>Is this a cardio or resistance (weights) workout?</label>
         </div>
         <div class="value vote">
             <div class="set">
-                <label for="cardio">Cardio</label><input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio"/>
+                <input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio"/>
+                <label for="cardio">Cardio</label>
             </div>
             <div class="set">
-                <label for="resistance">Resistance</label><input type="radio" id="resistance" name="exerciseType" value="resistance" data-bind="checked: baseType"/>
+                <input type="radio" id="resistance" name="exerciseType" value="resistance" data-bind="checked: baseType"/>
+                <label for="resistance">Resistance</label>
             </div>
         </div>
     </div>
 
-    <div class="field" data-bind="visible: baseType() == 'cardio'">
+    <div class="field" data-bind="visible: baseType() == 'cardio' && exerciseName()">
         <div class="label">
             <label>Will this workout be measured using time or distance?</label>
         </div>
         <div class="value vote">
             <div class="set">
-                <label for="time">Time</label><input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time"/>
+                <input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time"/>
+                <label for="time">Time</label>
             </div>
             <div class="set">
-                <label for="distance">Distance</label><input type="radio" id="distance" name="metricType" data-bind="checked: metricType" value="distance"/>
+                <input type="radio" id="distance" name="metricType" data-bind="checked: metricType" value="distance"/>
+                <label for="distance">Distance</label>
             </div>
         </div>
     </div>
 
-    <div class="field" data-bind="visible: baseType() == 'resistance'">
+    <div class="field" data-bind="visible: baseType() == 'resistance' && exerciseName()">
         <div class="label">
             <label>Will free-weights be used or body weight?</label>
         </div>
         <div class="value vote">
             <div class="set">
-                <label for="freeweight">Free-weights</label><input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight"/>
+                <input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight"/>
+                <label for="freeweight">Free weights</label>
             </div>
             <div class="set">
-                <label for="bodyweight">Body weight</label><input type="radio" id="bodyweight" name="metricType" data-bind="checked: metricType" value="rep"/>
+                <input type="radio" id="bodyweight" name="metricType" data-bind="checked: metricType" value="rep"/>
+                <label for="bodyweight">Body weight</label>
             </div>
         </div>
     </div>
-
-    <div class="summary">
-        <span data-bind="text: exerciseName"></span>
-        <span data-bind="text: metricType"></span>
-    </div>
-
+    
     <div class="action">
-        <input type="button" value="Create" data-bind="click: create, enable: exerciseName() && metricType()"/>
+        <input type="button" value="Create new exercise" data-bind="click: create, enable: exerciseName() && metricType()"/>
     </div>
 
 </fieldset>

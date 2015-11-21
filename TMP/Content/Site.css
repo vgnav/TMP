@@ -17,20 +17,129 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
+input[type=text],
 select,
 textarea {
-    max-width: 280px;
+    padding: 7px;
+    border: 1px solid #ddd;
+}
+
+input[type=text] {
+    font-size:1.2em;
+    color: #222;
+}
+
+input[type=text]:focus, select:focus, textara:focus{
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+    outline: 0;
 }
 
 .form label {
-    font-size: 1.6em;
+    font-size: 18px;
     font-weight: normal;    
     color: #111;
 }
 
 .form .label {
-    padding-left: 0;
+    padding-left: 0;    
+    text-align: left;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.form .field {
+    width: 100%;
+    max-width: 640px;
+    margin-bottom: 10px;
+}
+.form .field::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.form .field .set {
+    float: left;
+    width: 40%;
+}
+
+.set {
+    margin-right: 5px;
     
 }
+.set:hover, .set label:hover {
+    cursor: pointer;
+}
+
+.set label {
+    padding: 10px;
+    /*border-radius: 5px;*/
+    background-color: #ddd;
+    text-align: center;
+    font-size: 16px;   
+    width: 100%;  
+    margin-bottom: 0px;      
+    
+    -webkit-transition: background-color 200ms linear;
+    -moz-transition: background-color 200ms linear;
+    -o-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear; 
+}
+.set label:hover {
+    background-color: #ccc;
+
+    -webkit-transition: background-color 200ms linear;
+    -moz-transition: background-color 200ms linear;
+    -o-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+}
+.set input[type=radio] {
+    margin-right: 7px;
+}
+
+.field .vote input[type=radio] {
+    display: none;
+}
+.field .vote input[type=radio]:checked + label {   
+    background-color:rgb(66, 184, 221);
+    color: #fff;    
+
+    -webkit-transition: background-color 200ms linear;
+    -moz-transition: background-color 200ms linear;
+    -o-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+}
+
+.field input[type=text] {
+    width: 100%;
+}
+
+.action input[type=button], .action input[type=submit], .action button {
+    padding: 10px;
+    border: 0;
+    width: 200px;
+    max-width: 640px;
+    /*border-radius: 20px;*/
+    background-color: rgb(28, 184, 65);
+    color: #fff;
+    font-size: 16px;       
+    margin-bottom: 0px;       
+    margin-top: 10px;
+}
+.action input[type=button]:hover, .action input[type=submit]:hover, .action button:hover {
+    background-color: #106e27;
+    cursor: pointer;
+
+    -webkit-transition: background-color 200ms linear;
+    -moz-transition: background-color 200ms linear;
+    -o-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+}
+.action input[type=button]:disabled, .action input[type=submit]:disabled, .action button:disabled {
+    background-color: #ccc;
+    color: #999;
+}
+
