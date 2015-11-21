@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Track My Progress</title>
-    @Styles.Render("~/Content/appcss")
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/knockout")
     @RenderSection("koscripts", required: false) 
@@ -40,7 +40,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")    
-    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

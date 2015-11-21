@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "TMP.WEB"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-TMP.WEB-eb15ec2b-e100-4a27-8c31-39398a8a9d0d;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}

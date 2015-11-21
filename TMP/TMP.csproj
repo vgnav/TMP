@@ -168,8 +168,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Workouts\Controllers\WorkoutsController.cs" />
-    <Compile Include="Areas\Workouts\WorkoutsAreaRegistration.cs" />
     <Compile Include="Attributes\ValidateAJAXRequest.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Helpers.cs" />
@@ -195,8 +193,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Workouts\Views\web.config" />
-    <Content Include="Areas\Workouts\Views\Workouts\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -251,8 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Workouts\Models\" />
-    <Folder Include="Areas\Workouts\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

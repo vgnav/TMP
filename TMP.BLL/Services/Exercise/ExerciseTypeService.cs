@@ -28,9 +28,7 @@ namespace TMP.BLL.Services.Exercise
         public void AddNewExercise(ExerciseType exercise)
         {
             using (var repo = new ExerciseTypeRepository(_dbKey))
-            {
-                var allExercises = repo.FindAll();
-
+            {                
                 var matcingExercises = repo.Find(dbExc => 
                     dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase)
                     &&
