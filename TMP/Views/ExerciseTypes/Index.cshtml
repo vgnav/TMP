@@ -1,0 +1,25 @@
+﻿@using TMP.Domain.Entities.Exercises
+@using System.Collections.Generic
+
+@model IEnumerable<ExerciseType>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MinLayout.cshtml";
+    ViewBag.PageCSS = "allExerciseTypesPage";
+}
+
+<h2>All exercise types</h2>
+
+<ul>
+    @foreach (var exerciseType in Model)
+    {
+        <li>
+            @exerciseType.ExerciseName
+        </li>
+    }
+</ul>
+
+@Html.ActionLink("Add a new workout", "Add")
+

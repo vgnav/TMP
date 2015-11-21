@@ -168,7 +168,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Workouts\Controllers\WorkoutsController.cs" />
+    <Compile Include="Areas\Workouts\WorkoutsAreaRegistration.cs" />
+    <Compile Include="Attributes\ValidateAJAXRequest.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Helpers.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ExerciseTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +195,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Workouts\Views\web.config" />
+    <Content Include="Areas\Workouts\Views\Workouts\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -197,6 +205,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\koactions\addExercise.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -235,9 +245,14 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ExerciseTypes\Index.cshtml" />
+    <Content Include="Views\ExerciseTypes\Add.cshtml" />
+    <Content Include="Views\Shared\_MinLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Workouts\Models\" />
+    <Folder Include="Areas\Workouts\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -249,6 +264,20 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TMP.BLL\TMP.BLL.csproj">
+      <Project>{69d3292c-3dc3-43d5-b42f-27e2d580e347}</Project>
+      <Name>TMP.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMP.DAL\TMP.DAL.csproj">
+      <Project>{97dbd15f-ca68-48fb-8306-4b3f661d1f61}</Project>
+      <Name>TMP.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMP.Domain\TMP.Domain.csproj">
+      <Project>{96e684c3-d3f2-4fa5-ac3a-a8c3576ef1cf}</Project>
+      <Name>TMP.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

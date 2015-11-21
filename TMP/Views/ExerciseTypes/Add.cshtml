@@ -1,0 +1,81 @@
+﻿@using TMP.Common
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_MinLayout.cshtml";
+    ViewBag.PageCSS = "addExerciseTypesPage";
+}
+
+@section koscripts {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/koactions/addExercise.js" type="text/javascript"></script>
+    }
+
+<h2>Add an exercise</h2>
+
+<fieldset class="form" id="addExerciseForm">
+    
+    <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
+
+    <div class="field">
+        <div class="label">
+            <label for="name">Workout name</label>
+        </div>
+        <div class="value">
+            <input type="text" id="name" data-bind="textInput: exerciseName"/>
+        </div>        
+    </div>
+
+    <div class="field">
+        <div class="label">
+            <label>Is this a cardio or resistance (weights) workout?</label>
+        </div>
+        <div class="value vote">
+            <div class="set">
+                <label for="cardio">Cardio</label><input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio"/>
+            </div>
+            <div class="set">
+                <label for="resistance">Resistance</label><input type="radio" id="resistance" name="exerciseType" value="resistance" data-bind="checked: baseType"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="field" data-bind="visible: baseType() == 'cardio'">
+        <div class="label">
+            <label>Will this workout be measured using time or distance?</label>
+        </div>
+        <div class="value vote">
+            <div class="set">
+                <label for="time">Time</label><input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time"/>
+            </div>
+            <div class="set">
+                <label for="distance">Distance</label><input type="radio" id="distance" name="metricType" data-bind="checked: metricType" value="distance"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="field" data-bind="visible: baseType() == 'resistance'">
+        <div class="label">
+            <label>Will free-weights be used or body weight?</label>
+        </div>
+        <div class="value vote">
+            <div class="set">
+                <label for="freeweight">Free-weights</label><input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight"/>
+            </div>
+            <div class="set">
+                <label for="bodyweight">Body weight</label><input type="radio" id="bodyweight" name="metricType" data-bind="checked: metricType" value="rep"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary">
+        <span data-bind="text: exerciseName"></span>
+        <span data-bind="text: metricType"></span>
+    </div>
+
+    <div class="action">
+        <input type="button" value="Create" data-bind="click: create, enable: exerciseName() && metricType()"/>
+    </div>
+
+</fieldset>
+
