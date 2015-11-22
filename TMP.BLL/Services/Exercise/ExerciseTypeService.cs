@@ -46,6 +46,23 @@ namespace TMP.BLL.Services.Exercise
                 repo.Save();
             }            
         }
+
+        public bool ExerciseExists(ExerciseType exercise)
+        {
+            if (exercise == null || string.IsNullOrEmpty(exercise.ExerciseName)) return false;
+            using(var repo = new ExerciseTypeRepository(_dbKey))
+            {
+                var matcingExercises = repo.Find(dbExc =>
+                    dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase)
+                    &&
+                    dbExc.MetricType == exercise.MetricType
+                    );
+
+                if (matcingExercises != null && matcingExercises.Count() > 0)
+                    return true;
+            }
+            return false;
+        }
         
     }
 }

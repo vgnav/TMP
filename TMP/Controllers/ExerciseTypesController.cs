@@ -42,5 +42,20 @@ namespace TMP.Controllers
             }                
             return new HttpStatusCodeResult(500);
         }
+
+        [HttpPost]
+        [ValidateAJAXRequest]
+        public ActionResult IsValid(ExerciseType exerciseType)
+        {
+            if (exerciseType != null)
+            {
+                var service = new ExerciseTypeService(Common.Constants.Database.DBKey);
+                if (!service.ExerciseExists(exerciseType))
+                    return new HttpStatusCodeResult(200);
+                else
+                    return new HttpStatusCodeResult(400, "Exercise type already exists");
+            }
+            return new HttpStatusCodeResult(500);
+        }
     }
 }
