@@ -62,6 +62,7 @@
     <Compile Include="Entities\Identity\User.cs" />
     <Compile Include="Entities\Metrics\WeightMetric.cs" />
     <Compile Include="Exceptions\Exercise\ExerciseTypeAlreadyExists.cs" />
+    <Compile Include="Exceptions\Exercise\InvalidExerciseType.cs" />
     <Compile Include="Exceptions\TMPException.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -23,24 +23,22 @@ namespace TMP.BLL.Services.Exercise
             {
                 return repo.FindAll().ToList();
             }
-        }
+        }        
 
         public void AddNewExercise(ExerciseType exercise)
         {
+            if (exercise == null || string.IsNullOrEmpty(exercise.ExerciseName) || exercise.MetricType == Domain.Entities.MetricType.ERROR)
+                throw new InvalidExerciseType();
+
             using (var repo = new ExerciseTypeRepository(_dbKey))
             {                
-                var matcingExercises = repo.Find(dbExc => 
-                    dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase)
-                    &&
-                    dbExc.MetricType == exercise.MetricType
-                    );
-
+                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase));
                 if (matcingExercises != null && matcingExercises.Count() > 0)
                     throw new ExerciseTypeAlreadyExists();
 
                 exercise.Created = DateTime.Now;
                 exercise.Modified = DateTime.Now;
-                exercise.CreatedBy = null; //
+                exercise.CreatedBy = null; // todo
 
                 repo.Create(exercise);
                 repo.Save();
@@ -52,12 +50,7 @@ namespace TMP.BLL.Services.Exercise
             if (exercise == null || string.IsNullOrEmpty(exercise.ExerciseName)) return false;
             using(var repo = new ExerciseTypeRepository(_dbKey))
             {
-                var matcingExercises = repo.Find(dbExc =>
-                    dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase)
-                    &&
-                    dbExc.MetricType == exercise.MetricType
-                    );
-
+                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase));
                 if (matcingExercises != null && matcingExercises.Count() > 0)
                     return true;
             }

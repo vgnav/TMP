@@ -12,6 +12,6 @@
 
     public enum MetricType
     {
-        DISTANCE, TIME, REP, WEIGHT
+        ERROR, DISTANCE, TIME, REP, WEIGHT
     }
 }

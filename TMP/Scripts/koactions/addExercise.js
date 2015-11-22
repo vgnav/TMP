@@ -12,9 +12,6 @@
             self.baseType = ko.observable();
             self.metricType = ko.observable();
 
-            self.metricType.subscribe(function () {
-                checkIfValidExercise();
-            });
             self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' }});
             self.exerciseName.subscribe(function () {
                 checkIfValidExercise();
@@ -50,15 +47,14 @@
 
         var checkIfValidExercise = function () {            
             var ajaxParams = getAjaxParams('/ExerciseTypes/IsValid');
-            console.log(ajaxParams);
+
+            if (!ajaxParams.data.exerciseName) return; // don't do check if no value for exerciseName
             
             $.ajax(ajaxParams)
                 .done(function (response) {
-                    console.log(response);
                     console.log('pass');
                 })
                 .fail(function (response) {
-                    console.log(response);
                     console.log('fail');
                 });
         };

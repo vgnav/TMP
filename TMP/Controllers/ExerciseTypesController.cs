@@ -37,7 +37,11 @@ namespace TMP.Controllers
                 catch(ExerciseTypeAlreadyExists)
                 {
                     return new HttpStatusCodeResult(400, "Exercise type already exists");
-                }                
+                }       
+                catch(InvalidExerciseType)
+                {
+                    return new HttpStatusCodeResult(400, "Invalid exercise type");
+                }         
                 return new HttpStatusCodeResult(200);
             }                
             return new HttpStatusCodeResult(500);
