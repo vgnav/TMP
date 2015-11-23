@@ -77,23 +77,22 @@ input[type=text]:focus, select:focus, textara:focus{
     display: block;
     clear: both;
 }
-.form .field .set {
+.form .set {
     float: left;
-    width: 40%;
+}
+.form .vote.vote-2 .set {
+    width: 50%;
+}
+.form .vote.vote-2 .set:nth-child(2) {
+    width: 49%;
+    margin-left: 1%;
 }
 
-.set {
-    margin-right: 5px;
-    
-}
-
-.set input[type=radio] {
+.form .vote input[type=radio] {
+    display: none;
     margin-right: 7px;
 }
 
-.field .vote input[type=radio] {
-    display: none;
-}
 .field .vote input[type=radio] + label {
     cursor: pointer;
     padding: 10px;
@@ -101,7 +100,7 @@ input[type=text]:focus, select:focus, textara:focus{
     text-align: center;
     font-size: 16px;   
     width: 100%;  
-    margin-bottom: 0px;  
+    margin-bottom: 0px; 
 }
 .field .vote input[type=radio] + label:hover {
     background-color: #ccc;
@@ -119,7 +118,7 @@ input[type=text]:focus, select:focus, textara:focus{
     border-color: rgb(28, 184, 65);
 }
 .field input[type=text].error {
-    border-color: rgb(255, 0, 0);
+    border-color: rgba(255,0,0,0.5)
 }
 
 .action input[type=button], .action input[type=submit], .action button {
@@ -140,39 +139,21 @@ input[type=text]:focus, select:focus, textara:focus{
 .action input[type=button]:disabled, .action input[type=submit]:disabled, .action button:disabled {
     background-color: #ccc;
     color: #999;
+    cursor: not-allowed;
 }
-
-
-.errorList {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    background-color: rgba(211, 82, 82, 0.9);
-    color: #fff;
-    padding: 10px;
-    border-bottom: 0px solid #fff;
-    box-shadow: 0px 5px 10px 1px rgba(0,0,0,0.2);
-    min-height: 55px;
-}
-    .errorList ul {
-        margin-bottom: 0px;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .errorList li {
-        padding-left: 5px;
-    }
-    .errorList li[data-title] {
-        font-size: larger;
-        padding-left: 0;
-    }
 
 .errorMsg {
     display: block;
-    color: red;
     clear: both;
+    float: left;
+    color: #222;    
+    background-color: rgba(255,0,0,0.2);
+    padding: 5px 10px 5px 5px;
+    border-left: 7px solid rgba(255,0,0,0.3);
+    margin-top: 5px;
 }
-
+    .errorMsg::after {
+        content: "";
+        display: block;
+        clear: both;
+    }

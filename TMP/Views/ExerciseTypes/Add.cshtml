@@ -7,7 +7,6 @@
 }
 
 @section koscripts {
-    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js" type="text/javascript"></script>
     @*TODO: create a bundle for these*@
     <script src="~/Scripts/koactions/core.js" type="text/javascript"></script>
     <script src="~/Scripts/koactions/addExercise.js" type="text/javascript"></script>
@@ -22,17 +21,7 @@
 <fieldset class="form" id="addExerciseForm">
     
     <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
-
     
-    @*<div class="errorList" data-bind="visible: validationTriggered() && errors().length > 0">
-        <ul>
-            
-            <!-- ko foreach: errors -->
-            <li data-bind="text: $data"></li>
-            <!-- /ko -->
-        </ul>
-    </div>*@
-
     <div class="field">
         <div class="value">
             <input type="text" id="name" data-bind="textInput: exerciseName" placeholder="Workout name"/>
@@ -43,7 +32,7 @@
         <div class="label">
             <label>Is this a cardio or resistance (weights) workout?</label>
         </div>
-        <div class="value vote" data-bind="validationOptions: { insertMessages: false}">
+        <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio"/>
                 <label for="cardio">Cardio</label>
@@ -59,7 +48,7 @@
         <div class="label">
             <label>Will this workout be measured using time or distance?</label>            
         </div>        
-        <div class="value vote" data-bind="validationOptions: { insertMessages: false}">
+        <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time"/>
                 <label for="time">Time</label>
@@ -76,7 +65,7 @@
         <div class="label">
             <label>Will free-weights be used or body weight?</label>
         </div>
-        <div class="value vote" data-bind="validationOptions: { insertMessages: false}">
+        <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight"/>
                 <label for="freeweight">Free weights</label>
@@ -90,7 +79,7 @@
     </div>
     
     <div class="action">
-        <input type="button" value="Create workout now" data-bind="click: create, enable: exerciseName() && metricType()"/>
+        <input type="button" value="Create workout" data-bind="click: create, enable: errors().length <= 0 && !isValidating()"/>
     </div>
 
 </fieldset>

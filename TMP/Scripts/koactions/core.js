@@ -55,8 +55,8 @@ TMP.Common.logViewChanges = function (model) {
         var app = {};
         app.startUp = function () {
             toastr.options = {
-                'closeButton': false,
-                'progressBar': false,
+                'closeButton': true,
+                'progressBar': true,
                 'positionClass': 'toast-top-left',
                 'preventDuplicates': true,
                 'showDuration': '300',

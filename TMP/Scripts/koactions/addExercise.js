@@ -23,25 +23,10 @@
             self.metricType = ko.observable();
 
             self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });            
-            //self.exerciseName.subscribe(function (value) {                
-            //    if (!value) return;
-            //    // if validation has been triggered, then don't need to show these alerts
-            //    if (self['validationTriggered'] && self['validationTriggered']()) return;
-
-            //    var showAlert = function (result) {
-            //        if (result) {
-            //            toastr.success(config.validWorkoutName);
-            //        } else {
-            //            toastr.error(config.workoutExists);
-            //        }
-            //    };
-            //    checkIfValidExercise(showAlert);
-            //});
         };
 
         ExerciseType.prototype.create = function () {
             var self = this;
-            self.validationTriggered(true);
 
             var ajaxParams = getAjaxParams(config.addUrl);
             
@@ -57,13 +42,12 @@
 
             var success = function () {
                 toastr.success(config.workoutAdded);
-                self.validationTriggered(false);
                 self.exerciseName('');
                 // there is a timeout on this because there's a rate limiter applied to the observable
                 setTimeout(function () { self.exerciseName.clearError(); }, 500);
                 self.baseType('');
                 self.metricType('');
-                self.metricType.clearError();
+                // self.metricType.clearError();
             };
 
             var fail = function () {
@@ -103,7 +87,6 @@
             ko.validation.registerExtenders();
             
             self.errors = ko.validation.group(self);
-            self.validationTriggered = ko.observable(false);
 
             self.exerciseName.extend({ required: { params: true, message: config.workoutNameRequired } });
             self.exerciseName.extend({ validateExerciseName: self });
