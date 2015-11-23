@@ -12,9 +12,15 @@
             self.baseType = ko.observable();
             self.metricType = ko.observable();
 
-            self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' }});
+            self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });            
             self.exerciseName.subscribe(function () {
-                checkIfValidExercise();
+                var pass = function () {
+                    $('#name').notify('Valid exercise name', 'success');
+                };                
+                var fail = function () {
+                    $('#name').notify('Exercise already exists', 'error');
+                }
+                checkIfValidExercise(pass, fail);
             });
         };
 
@@ -45,17 +51,17 @@
                 });
         };
 
-        var checkIfValidExercise = function () {            
+        var checkIfValidExercise = function (pass, fail) {            
             var ajaxParams = getAjaxParams('/ExerciseTypes/IsValid');
 
             if (!ajaxParams.data.exerciseName) return; // don't do check if no value for exerciseName
             
             $.ajax(ajaxParams)
                 .done(function (response) {
-                    console.log('pass');
+                    if (pass) pass();
                 })
                 .fail(function (response) {
-                    console.log('fail');
+                    if (fail) fail();
                 });
         };
 
@@ -77,6 +83,7 @@
             _model = new ExerciseType();
             app.Model = _model;
             ko.applyBindings(_model, document.getElementById('addExerciseForm'));
+            showFormOnceLoaded();
         };
 
         return app;

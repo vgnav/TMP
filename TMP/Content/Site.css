@@ -17,11 +17,14 @@
     white-space: normal;
 }
 
-/* Set background color transition for these */
+/* Set background color transition for these elements*/
 .set label,
 .set label:hover,
 .field .vote input[type=radio]:checked + label,
-.action input[type=button]:hover, .action input[type=submit]:hover, .action button:hover
+.action input[type=button]:hover, .action input[type=submit]:hover, 
+.action button:hover,
+.field .vote input[type=radio] + label,
+.field .vote input[type=radio] + label:hover
  {    
     -webkit-transition: background-color 200ms linear;
     -moz-transition: background-color 200ms linear;
@@ -45,6 +48,10 @@ input[type=text] {
 input[type=text]:focus, select:focus, textara:focus{
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
     outline: 0;
+}
+
+.form {
+    display: none;
 }
 
 .form label {
@@ -79,28 +86,25 @@ input[type=text]:focus, select:focus, textara:focus{
     margin-right: 5px;
     
 }
-.set:hover, .set label:hover {
-    cursor: pointer;
-}
 
-.set label {
-    padding: 10px;
-    /*border-radius: 5px;*/
-    background-color: #ddd;
-    text-align: center;
-    font-size: 16px;   
-    width: 100%;  
-    margin-bottom: 0px;          
-}
-.set label:hover {
-    background-color: #ccc;
-}
 .set input[type=radio] {
     margin-right: 7px;
 }
 
 .field .vote input[type=radio] {
     display: none;
+}
+.field .vote input[type=radio] + label {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ddd;
+    text-align: center;
+    font-size: 16px;   
+    width: 100%;  
+    margin-bottom: 0px;  
+}
+.field .vote input[type=radio] + label:hover {
+    background-color: #ccc;
 }
 .field .vote input[type=radio]:checked + label {   
     background-color:rgb(66, 184, 221);
@@ -111,12 +115,18 @@ input[type=text]:focus, select:focus, textara:focus{
     width: 100%;
 }
 
+.field input[type=text].valid {
+    border-color: rgb(28, 184, 65);
+}
+.field input[type=text].error {
+    border-color: rgb(255, 0, 0);
+}
+
 .action input[type=button], .action input[type=submit], .action button {
     padding: 10px;
     border: 0;
     width: 200px;
     max-width: 640px;
-    /*border-radius: 20px;*/
     background-color: rgb(28, 184, 65);
     color: #fff;
     font-size: 16px;       
@@ -132,3 +142,17 @@ input[type=text]:focus, select:focus, textara:focus{
     color: #999;
 }
 
+
+.errorList {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: rgba(211, 82, 82, 0.9);
+    color: #fff;
+    padding: 10px;
+}
+    .errorList ul {
+        margin-bottom: 0px;
+    }

@@ -1,12 +1,13 @@
 ﻿
 namespace TMP.BLL.Services.Exercise
-{
+{    
     using DAL.Repositories;
     using System.Linq;
     using Domain.Entities.Exercises;
     using Domain.Exceptions.Exercise;
     using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
 
     public class ExerciseTypeService
     {
@@ -31,8 +32,8 @@ namespace TMP.BLL.Services.Exercise
                 throw new InvalidExerciseType();
 
             using (var repo = new ExerciseTypeRepository(_dbKey))
-            {                
-                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase));
+            {
+                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName.Trim(), StringComparison.OrdinalIgnoreCase));
                 if (matcingExercises != null && matcingExercises.Count() > 0)
                     throw new ExerciseTypeAlreadyExists();
 
@@ -50,7 +51,7 @@ namespace TMP.BLL.Services.Exercise
             if (exercise == null || string.IsNullOrEmpty(exercise.ExerciseName)) return false;
             using(var repo = new ExerciseTypeRepository(_dbKey))
             {
-                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName, StringComparison.OrdinalIgnoreCase));
+                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName.Trim(), StringComparison.OrdinalIgnoreCase));
                 if (matcingExercises != null && matcingExercises.Count() > 0)
                     return true;
             }
