@@ -7,7 +7,9 @@
 
         app.init = function () {
             $.notify.defaults({
-                clickToHide: true,                
+                clickToHide: true,
+                autoHideDelay: 2000,
+                globalPosition: 'top left'
             });
         };
 

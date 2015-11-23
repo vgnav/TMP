@@ -152,7 +152,20 @@ input[type=text]:focus, select:focus, textara:focus{
     background-color: rgba(211, 82, 82, 0.9);
     color: #fff;
     padding: 10px;
+    border-bottom: 0px solid #fff;
+    box-shadow: 0px 5px 10px 1px rgba(0,0,0,0.2);
+    min-height: 55px;
 }
     .errorList ul {
         margin-bottom: 0px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .errorList li {
+        padding-left: 5px;
+    }
+    .errorList li[data-title] {
+        font-size: larger;
+        padding-left: 0;
     }

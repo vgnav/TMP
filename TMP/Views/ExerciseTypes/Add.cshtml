@@ -7,7 +7,7 @@
 }
 
 @section koscripts {
-    @*<script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js" type="text/javascript"></script>*@
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js" type="text/javascript"></script>
     @*TODO: create a bundle for these*@
     <script src="~/Scripts/koactions/core.js" type="text/javascript"></script>
     <script src="~/Scripts/koactions/addExercise.js" type="text/javascript"></script>
@@ -23,11 +23,13 @@
     
     <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
 
-    <div class="errorList">
+    
+    <div class="errorList" data-bind="visible: validationTriggered() && errors().length > 0">
         <ul>
-            <li>Error one</li>
-            <li>Error two</li>
-            <li>Error three</li>
+            @*<li>Please fix the following error(s):</li>*@
+            <!-- ko foreach: errors -->
+            <li data-bind="text: $data"></li>
+            <!-- /ko -->
         </ul>
     </div>
 
