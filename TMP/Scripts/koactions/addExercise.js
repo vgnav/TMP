@@ -3,7 +3,17 @@
 (function (window, document) {
 
     window.ExerciseApp = (function () {
-        var _initialised = false, app = {}, _model, _tracker;                
+        var _initialised = false, app = {}, _model, _tracker;
+        var config = {
+            validWorkoutName: 'This workout does not exist yet!',
+            workoutExists: 'This workout already exists, please use another name',
+            addUrl: '/ExerciseTypes/Add',
+            isValidUrl: '/ExerciseTypes/IsValid',
+            workoutAdded: 'Added new workout type!',
+            workoutErrorAdding: 'Error creating new workout. Please try again',
+            workoutNameRequired: 'Workout name is required',
+            validWorkoutType: 'Select a valid exercise type',
+        }
         
         var ExerciseType = function () {
             var self = this;
@@ -13,13 +23,16 @@
             self.metricType = ko.observable();
 
             self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });            
-            self.exerciseName.subscribe(function (value) {
+            self.exerciseName.subscribe(function (value) {                
                 if (!value) return;
+                // if validation has been triggered, then don't need to show these alerts
+                if (self['validationTriggered'] && self['validationTriggered']()) return;
+
                 var showAlert = function (result) {
                     if (result) {
-                        $.notify('This workout does not exist yet!', 'success');
+                        toastr['success'](config.validWorkoutName);
                     } else {
-                        $.notify('Workout already exists', 'error');
+                        toastr['error'](config.workoutExists);
                     }
                 };
                 checkIfValidExercise(showAlert);
@@ -30,7 +43,7 @@
             var self = this;
             self.validationTriggered(true);
 
-            var ajaxParams = getAjaxParams('/ExerciseTypes/Add');
+            var ajaxParams = getAjaxParams(config.addUrl);
             
             var createAction = function (callback) {
                 $.ajax(ajaxParams)
@@ -43,9 +56,10 @@
             };
 
             var success = function () {
-                $.notify('Added new workout type!', 'success');
+                toastr.success(config.workoutAdded);
                 self.validationTriggered(false);
                 self.exerciseName('');
+                // there is a timeout on this because there's a rate limiter applied to the observable
                 setTimeout(function () { self.exerciseName.clearError(); }, 500);
                 self.baseType('');
                 self.metricType('');
@@ -53,7 +67,7 @@
             };
 
             var fail = function () {
-                $.notify('Error creating new workout. Please try again', 'error');
+                toastr.error(config.workoutErrorAdding);
             };
 
             if (self.errors().length <= 0) {
@@ -74,26 +88,28 @@
             // extenders
             ko.validation.rules['validateExerciseName'] = {
                 async: true,
-                message: 'This workout already exists, please use another name',
+                message: config.workoutExists,
                 validator: function (val1, val2, callback) {       
                     checkIfValidExercise(callback);
                 }
             };
 
             ko.validation.init({
-                insertMessages: false
+                insertMessages: false,
+                decorateInputElement: true,
+                errorElementClass: 'error'
             });
             ko.validation.registerExtenders();
             
             self.errors = ko.validation.group(self);
             self.validationTriggered = ko.observable(false);
 
-            self.exerciseName.extend({ required: { params: true, message: 'Workout name is required' } });
+            self.exerciseName.extend({ required: { params: true, message: config.workoutNameRequired } });
             self.exerciseName.extend({ validateExerciseName: self });
 
             self.metricType.extend({
                 validation: {
-                    message: 'Select valid exercise type',
+                    message: config.validWorkoutType,
                     validator: function () {                        
                         if (self.baseType() == 'cardio')
                             return self.metricType() == 'time' || self.metricType() == 'distance';
@@ -110,7 +126,7 @@
         };
 
         var checkIfValidExercise = function (callback) {            
-            var ajaxParams = getAjaxParams('/ExerciseTypes/IsValid');
+            var ajaxParams = getAjaxParams(config.isValidUrl);
 
             if (!ajaxParams.data.exerciseName) callback(true); // don't do check if no value for exerciseName
             

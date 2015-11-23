@@ -1,7 +1,7 @@
 ﻿@using TMP.Common
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Add workout";
     Layout = "~/Views/Shared/_MinLayout.cshtml";
     ViewBag.PageCSS = "addExerciseTypesPage";
 }
@@ -13,7 +13,7 @@
     <script src="~/Scripts/koactions/addExercise.js" type="text/javascript"></script>
     }
 
-<h2>Add an exercise</h2>
+<h2>Add a new workout</h2>
 
 <section class="formLoading">
     Loading form
@@ -88,7 +88,7 @@
     </div>
     
     <div class="action">
-        <input type="button" value="Create new exercise" data-bind="click: create, enable: exerciseName() && metricType()"/>
+        <input type="button" value="Create workout now" data-bind="click: create, enable: exerciseName() && metricType()"/>
     </div>
 
 </fieldset>

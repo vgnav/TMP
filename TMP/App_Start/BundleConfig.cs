@@ -10,7 +10,7 @@ namespace TMP
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/notify.min.js"));
+                        "~/Scripts/toastr.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/Scripts/knockout-{version}.js"));
@@ -29,6 +29,7 @@ namespace TMP
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/toastr.min.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/appcss").Include(                      
