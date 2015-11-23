@@ -1,44 +1,20 @@
 ﻿'use strict';
 
-// start-up functions
-(function (window, document) {
-    window.Core = (function () {
-        var app = {};
+var TMP = {};
 
-        app.init = function () {
-            //$.notify.defaults({
-            //    clickToHide: true,
-            //    autoHideDelay: 2000,
-            //    globalPosition: 'top left'
-            //});
-            toastr.options = {
-                'closeButton': false,
-                'progressBar': false,
-                'positionClass': 'toast-top-left',
-                'preventDuplicates': true,
-                'showDuration': '300',
-                'hideDuration': '1000',
-                'timeOut': '2000',
-                'extendedTimeOut': '1000',
-                'showEasing': 'swing',
-                'hideEasing': 'linear',
-                'showMethod': 'fadeIn',
-                'hideMethod': 'fadeOut',
-                'newestOnTop': true
-            }
-        };
+TMP.Common = {};
 
-        return app;
-    })();
+TMP.Common.showFormOnceLoaded = function (form, loadingEl) {
+    // Defaults
+    if (!form) form = '.form';
+    if (!loadingEl) loadingEl = '.formLoading';
 
-    if (window.addEventListener) {
-        window.addEventListener('DOMContentLoaded', window.Core.init, false);
-    }
+    $(loadingEl).fadeOut(function () {
+        $(form).fadeIn();
+    });
+};
 
-})(window, document);
-
-
-var TrackView = function (model) {
+TMP.Common.logViewChanges = function (model) {
     var self = this;
     self.changeLog = new Array();
     self.model = model;
@@ -73,11 +49,36 @@ var TrackView = function (model) {
     };
 };
 
-function showFormOnceLoaded(form, loadingEl) {
-    if (!form) form = '.form';
-    if (!loadingEl) loadingEl = '.formLoading';
+// start-up functions. Need to do it like this because can't guarantee that JQuery is loaded...
+(function (window, document) {
+    window.appInit = (function () {
+        var app = {};
+        app.startUp = function () {
+            toastr.options = {
+                'closeButton': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-left',
+                'preventDuplicates': true,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '2000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+                'newestOnTop': true
+            }
+        };
 
-    $(loadingEl).fadeOut(function () {
-        $(form).fadeIn();
-    });
-};
+        return app;
+    })();
+
+    if (window.addEventListener) {
+        window.addEventListener('DOMContentLoaded', window.appInit.startUp, false);
+    }
+
+})(window, document);
+
+
+

@@ -12,7 +12,7 @@
             workoutAdded: 'Added new workout type!',
             workoutErrorAdding: 'Error creating new workout. Please try again',
             workoutNameRequired: 'Workout name is required',
-            validWorkoutType: 'Select a valid exercise type',
+            validWorkoutType: 'Select a workout type',
         }
         
         var ExerciseType = function () {
@@ -23,20 +23,20 @@
             self.metricType = ko.observable();
 
             self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });            
-            self.exerciseName.subscribe(function (value) {                
-                if (!value) return;
-                // if validation has been triggered, then don't need to show these alerts
-                if (self['validationTriggered'] && self['validationTriggered']()) return;
+            //self.exerciseName.subscribe(function (value) {                
+            //    if (!value) return;
+            //    // if validation has been triggered, then don't need to show these alerts
+            //    if (self['validationTriggered'] && self['validationTriggered']()) return;
 
-                var showAlert = function (result) {
-                    if (result) {
-                        toastr['success'](config.validWorkoutName);
-                    } else {
-                        toastr['error'](config.workoutExists);
-                    }
-                };
-                checkIfValidExercise(showAlert);
-            });
+            //    var showAlert = function (result) {
+            //        if (result) {
+            //            toastr.success(config.validWorkoutName);
+            //        } else {
+            //            toastr.error(config.workoutExists);
+            //        }
+            //    };
+            //    checkIfValidExercise(showAlert);
+            //});
         };
 
         ExerciseType.prototype.create = function () {
@@ -95,9 +95,10 @@
             };
 
             ko.validation.init({
-                insertMessages: false,
+                insertMessages: true,
                 decorateInputElement: true,
-                errorElementClass: 'error'
+                errorElementClass: 'error',
+                errorMessageClass: 'errorMsg'
             });
             ko.validation.registerExtenders();
             
@@ -158,7 +159,7 @@
             _model.initValidation();
             app.Model = _model;
             ko.applyBindings(_model, document.getElementById('addExerciseForm'));
-            showFormOnceLoaded();
+            TMP.Common.showFormOnceLoaded();
         };
 
         return app;

@@ -24,14 +24,14 @@
     <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
 
     
-    <div class="errorList" data-bind="visible: validationTriggered() && errors().length > 0">
+    @*<div class="errorList" data-bind="visible: validationTriggered() && errors().length > 0">
         <ul>
-            @*<li>Please fix the following error(s):</li>*@
+            
             <!-- ko foreach: errors -->
             <li data-bind="text: $data"></li>
             <!-- /ko -->
         </ul>
-    </div>
+    </div>*@
 
     <div class="field">
         <div class="value">
@@ -43,7 +43,7 @@
         <div class="label">
             <label>Is this a cardio or resistance (weights) workout?</label>
         </div>
-        <div class="value vote">
+        <div class="value vote" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio"/>
                 <label for="cardio">Cardio</label>
@@ -57,9 +57,9 @@
 
     <div class="field" data-bind="visible: baseType() == 'cardio' && exerciseName()">
         <div class="label">
-            <label>Will this workout be measured using time or distance?</label>
-        </div>
-        <div class="value vote">
+            <label>Will this workout be measured using time or distance?</label>            
+        </div>        
+        <div class="value vote" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time"/>
                 <label for="time">Time</label>
@@ -69,13 +69,14 @@
                 <label for="distance">Distance</label>
             </div>
         </div>
+        <div data-bind="validationMessage: metricType" class="errorMsg"></div>
     </div>
 
     <div class="field" data-bind="visible: baseType() == 'resistance' && exerciseName()">
         <div class="label">
             <label>Will free-weights be used or body weight?</label>
         </div>
-        <div class="value vote">
+        <div class="value vote" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight"/>
                 <label for="freeweight">Free weights</label>
@@ -85,6 +86,7 @@
                 <label for="bodyweight">Body weight</label>
             </div>
         </div>
+        <div data-bind="validationMessage: metricType" class="errorMsg"></div>
     </div>
     
     <div class="action">

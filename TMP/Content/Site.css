@@ -169,3 +169,10 @@ input[type=text]:focus, select:focus, textara:focus{
         font-size: larger;
         padding-left: 0;
     }
+
+.errorMsg {
+    display: block;
+    color: red;
+    clear: both;
+}
+
