@@ -145,6 +145,57 @@ input[type=text]:focus, select:focus, textara:focus{
     cursor: not-allowed;
 }
 
+.value.workoutName input[type=text] {
+    width: 79%;
+}
+.value.workoutName .actions {
+    float: right;
+    margin-top: 3px;
+}
+    .value.workoutName .actions:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+    }
+.value.workoutName a {
+    font-size: 26px;
+    color: #999;
+}
+    .value.workoutName a:hover {
+        color: #222;
+    }
+    .value.workoutName a:hover, .value.workoutName a:focus {
+        text-decoration: none;
+    }
+
+.metric li:after {
+    content: "";
+    display: block;
+    height: 10px;
+    clear: both;
+}
+    .metric .vote {
+        margin-top:5px;
+    }
+
+    .metric .weightSet input[type=text]{
+        float: left;
+    }
+    .metric .weightSet .rep {
+        width: 29%;
+        margin-right: 1%;
+    }
+    .metric .weightSet .weight {
+        width: 70%;
+    }
+    .metric .weightSet:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0px;
+    }
+
 .errorMsg {
     display: block;
     clear: both;

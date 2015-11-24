@@ -11,7 +11,8 @@
                 2: 'time',
                 3: 'rep',
                 4: 'weight'
-            }
+            },
+            confirmSetRemove: 'Are you sure you want to remove this set from the workout?'
         };
 
         var Workout = function () {
@@ -34,6 +35,8 @@
             self.metricType = ko.observable();
             self.exercises = ko.observableArray();
 
+            self.toggleSet = ko.observable(true);
+
             self.workoutName.subscribe(function (value) {
                 if (!value) {
                     // purge current Set info
@@ -44,12 +47,11 @@
                         toastr.error(config.workoutNotFound);
                         return;
                     }
-                    console.log(data);
                     self.exerciseTypeId(data.exerciseTypeId);
 
                     // DEBUG ONLY - generate a random metric type since server is returning hard coded value
                     data.metricType = Math.floor(Math.random() * (5 - 1)) + 1;
-                    console.log(data.metricType);
+                    // data.metricType = 2; // distance
                     // END DEBUG
 
                     self.metricType(config.metricTypes[data.metricType]);
@@ -66,8 +68,20 @@
 
         Set.prototype.addRep = function () {
             var self = this;
+            var prev = null;
             self.exercises.push(new Exercise(self));
+            self.toggleSet(true);
         };
+
+        Set.prototype.toggleVisible = function () {
+            this.toggleSet(!this.toggleSet());
+        }
+
+        Set.prototype.remove = function (set) {
+            if (window.confirm(config.confirmSetRemove)) {
+                _model.sets.remove(set);
+            }            
+        }
 
         var Exercise = function (set) {
             var self = this;
@@ -82,6 +96,7 @@
                 self.time = ko.observable();
                 self.calories = ko.observable();
                 // TODO: units
+                self.elId = 'time_' + _model.sets().length + "_" + exercise.set.exercises().length;
             };
 
             var DistanceMetric = function (exercise) {
@@ -89,13 +104,14 @@
                 self.exercise = exercise;
                 self.distance = ko.observable();
                 self.calories = ko.observable();
-                // TODO: units
+                self.elId = 'distance_' + _model.sets().length + "_" + exercise.set.exercises().length;
             };
 
             var RepMetric = function (exercise) {
                 var self = this;
                 self.exercise = exercise;
                 self.reps = ko.observable();
+                self.elId = 'rep_' + _model.sets().length + "_" + exercise.set.exercises().length;
             };
 
             var WeightMetric = function (exercise) {
@@ -104,6 +120,7 @@
                 self.reps = ko.observable();
                 self.weight = ko.observable();
                 // TODO: units
+                self.elId = 'weight_' + _model.sets().length + "_" + exercise.set.exercises().length;
             };
 
         var metricTemplates = {
