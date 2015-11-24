@@ -50,8 +50,11 @@ input[type=text]:focus, select:focus, textara:focus{
     outline: 0;
 }
 
+
+
 .form {
     display: none;
+    margin-bottom: 10px;
 }
 
 .form label {
@@ -157,3 +160,38 @@ input[type=text]:focus, select:focus, textara:focus{
         display: block;
         clear: both;
     }
+
+.contextLinks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ddd;
+    padding: 0px 10px;
+}
+    .contextLinks li {
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        display: block;
+        padding: 10px 0px;
+    }    
+    .contextLinks li:last-child {    
+        border-width: 0px;        
+    }
+    .contextLinks a {
+        display: block;
+        width: 100%;
+    }
+    
+
+::-webkit-input-placeholder {
+   color: #999;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: #999;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #999;
+}
+:-ms-input-placeholder {  
+  color: #999 !important; /*doesn't work in IE otherwise because the input element has a colour applied to it*/
+}
