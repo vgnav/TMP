@@ -5,12 +5,15 @@
 
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_MinLayout.cshtml";
+    ViewBag.Title = "All workout types";
+    Layout = "~/Views/Shared/_StndGridLayout.cshtml";
     ViewBag.PageCSS = "allExerciseTypesPage";
 }
 
-<h2>All exercise types</h2>
+@section heading {
+    <h2>All workout types</h2>
+}
+
 
 <ul>
     @foreach (var exerciseType in Model)
@@ -21,5 +24,15 @@
     }
 </ul>
 
-@Html.ActionLink("Add a new workout", "Add")
+@section rightPanel {
+    <ul class="contextLinks">
+        <li>
+            @Html.ActionLink("Add a new workout", "Add")
+        </li>
+        <li>
+            @Html.ActionLink("Workouts I created", "Mine")
+        </li>
+    </ul> 
+ }
+
 

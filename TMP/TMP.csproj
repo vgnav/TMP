@@ -171,10 +171,12 @@
     <Compile Include="Attributes\ValidateAJAXRequest.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Helpers.cs" />
+    <Compile Include="Common\JsonActionResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ExerciseTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +208,7 @@
     <Content Include="Scripts\knockout.validation.min.js" />
     <Content Include="Scripts\koactions\addExercise.js" />
     <Content Include="Scripts\koactions\core.js" />
+    <Content Include="Scripts\koactions\workout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\notify.min.js" />
     <Content Include="Scripts\respond.js" />
@@ -249,6 +252,8 @@
     <Content Include="Views\ExerciseTypes\Index.cshtml" />
     <Content Include="Views\ExerciseTypes\Add.cshtml" />
     <Content Include="Views\Shared\_MinLayout.cshtml" />
+    <Content Include="Views\Workout\Index.cshtml" />
+    <Content Include="Views\Shared\_StndGridLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

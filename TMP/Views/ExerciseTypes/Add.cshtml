@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Add workout";
-    Layout = "~/Views/Shared/_MinLayout.cshtml";
+    Layout = "~/Views/Shared/_StndGridLayout.cshtml";
     ViewBag.PageCSS = "addExerciseTypesPage";
 }
 
@@ -12,93 +12,94 @@
     <script src="~/Scripts/koactions/addExercise.js" type="text/javascript"></script>
     }
 
-<h2>Add a new workout</h2>
+@section heading {
+    <h2>Add a new workout</h2>
+}
 
-<div class="row">
-    <div class="col-sm-7">
+<section class="formLoading">
+    Loading form
+</section>
 
-        <section class="formLoading">
-            Loading form
-        </section>
+<fieldset class="form" id="addExerciseForm">
 
-        <fieldset class="form" id="addExerciseForm">
+    <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
 
-            <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
-
-            <div class="field">
-                <div class="value">
-                    <input type="text" id="name" data-bind="textInput: exerciseName" placeholder="Workout name" />
-                </div>
-            </div>
-
-            <div class="field" data-bind="visible: exerciseName()">
-                <div class="label">
-                    <label>Is this a cardio or resistance (weights) workout?</label>
-                </div>
-                <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
-                    <div class="set">
-                        <input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio" />
-                        <label for="cardio">Cardio</label>
-                    </div>
-                    <div class="set">
-                        <input type="radio" id="resistance" name="exerciseType" value="resistance" data-bind="checked: baseType" />
-                        <label for="resistance">Resistance</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field" data-bind="visible: baseType() == 'cardio' && exerciseName()">
-                <div class="label">
-                    <label>Will this workout be measured using time or distance?</label>
-                </div>
-                <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
-                    <div class="set">
-                        <input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time" />
-                        <label for="time">Time</label>
-                    </div>
-                    <div class="set">
-                        <input type="radio" id="distance" name="metricType" data-bind="checked: metricType" value="distance" />
-                        <label for="distance">Distance</label>
-                    </div>
-                </div>
-                <div data-bind="validationMessage: metricType" class="errorMsg"></div>
-            </div>
-
-            <div class="field" data-bind="visible: baseType() == 'resistance' && exerciseName()">
-                <div class="label">
-                    <label>Will free-weights be used or body weight?</label>
-                </div>
-                <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
-                    <div class="set">
-                        <input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight" />
-                        <label for="freeweight">Free weights</label>
-                    </div>
-                    <div class="set">
-                        <input type="radio" id="bodyweight" name="metricType" data-bind="checked: metricType" value="rep" />
-                        <label for="bodyweight">Body weight</label>
-                    </div>
-                </div>
-                <div data-bind="validationMessage: metricType" class="errorMsg"></div>
-            </div>
-
-            <div class="action">
-                <input type="button" value="Create workout" data-bind="click: create, enable: errors().length <= 0 && !isValidating()" />
-            </div>
-
-        </fieldset>
-
+    <div class="field">
+        <div class="value">
+            <input type="text" id="name" data-bind="textInput: exerciseName" placeholder="Workout name" />
+        </div>
     </div>
-    <div class="col-sm-5">
-        <ul class="contextLinks">
-            <li>
-                @Html.ActionLink("View all workouts", "")
-            </li>
-            <li>
-                @Html.ActionLink("Workouts I created", "Mine")
-            </li>
-        </ul>        
+
+    <div class="field" data-bind="visible: exerciseName()">
+        <div class="label">
+            <label>Is this a cardio or resistance (weights) workout?</label>
+        </div>
+        <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
+            <div class="set">
+                <input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio" />
+                <label for="cardio">Cardio</label>
+            </div>
+            <div class="set">
+                <input type="radio" id="resistance" name="exerciseType" value="resistance" data-bind="checked: baseType" />
+                <label for="resistance">Resistance</label>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="field" data-bind="visible: baseType() == 'cardio' && exerciseName()">
+        <div class="label">
+            <label>Will this workout be measured using time or distance?</label>
+        </div>
+        <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
+            <div class="set">
+                <input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time" />
+                <label for="time">Time</label>
+            </div>
+            <div class="set">
+                <input type="radio" id="distance" name="metricType" data-bind="checked: metricType" value="distance" />
+                <label for="distance">Distance</label>
+            </div>
+        </div>
+        <div data-bind="validationMessage: metricType" class="errorMsg"></div>
+    </div>
+
+    <div class="field" data-bind="visible: baseType() == 'resistance' && exerciseName()">
+        <div class="label">
+            <label>Will free-weights be used or body weight?</label>
+        </div>
+        <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
+            <div class="set">
+                <input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight" />
+                <label for="freeweight">Free weights</label>
+            </div>
+            <div class="set">
+                <input type="radio" id="bodyweight" name="metricType" data-bind="checked: metricType" value="rep" />
+                <label for="bodyweight">Body weight</label>
+            </div>
+        </div>
+        <div data-bind="validationMessage: metricType" class="errorMsg"></div>
+    </div>
+
+    <div class="action">
+        <input type="button" value="Create workout" data-bind="click: create, enable: errors().length <= 0 && !isValidating()" />
+    </div>
+
+</fieldset>
+
+
+@section rightPanel {
+    <ul class="contextLinks">
+        <li>
+            @Html.ActionLink("View all workouts", "")
+        </li>
+        <li>
+            @Html.ActionLink("Workouts I created", "Mine")
+        </li>
+    </ul> 
+}
+
+       
+
 
 
 

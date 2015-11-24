@@ -22,7 +22,7 @@
             self.baseType = ko.observable();
             self.metricType = ko.observable();
 
-            self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });            
+            self.exerciseName.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } }); 
         };
 
         ExerciseType.prototype.create = function () {

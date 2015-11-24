@@ -1,0 +1,81 @@
+﻿@using TMP.Common
+
+@{
+    ViewBag.Title = "Workouts";
+    Layout = "~/Views/Shared/_StndGridLayout.cshtml";
+    ViewBag.PageCSS = "addWorkoutPage";
+}
+
+@section koscripts {
+    <script src="~/Scripts/koactions/core.js" type="text/javascript"></script>
+    <script src="~/Scripts/koactions/workout.js" type="text/javascript"></script>
+}
+
+@section heading {
+    <h2>Add a workout</h2>
+}
+
+<section class="formLoading">
+    Loading form
+</section>
+
+<fieldset class="form" id="workoutForm">
+    <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
+
+    <section data-bind="foreach: sets">
+        <div class="field">
+            <div class="value">
+                <input type="text" id="name" placeholder="Workout name" data-bind="textInput: workoutName"/>
+            </div>
+        </div>
+
+        <div class="field metric time">
+
+            <!-- ko if: metricType() == 'time' -->
+            <ol class="value" data-bind="foreach: exercises">
+                <li>
+                    <input type="text" placeholder="Time" />
+                </li>
+            </ol>
+            <!-- /ko -->
+            <!-- ko if: metricType() == 'distance' -->
+            <ol class="value" data-bind="foreach: exercises">
+                <li>
+                    <input type="text" placeholder="Distance covered" />
+                </li>
+            </ol>
+            <!-- /ko -->
+            <!-- ko if: metricType() == 'rep' -->
+            <ol class="value" data-bind="foreach: exercises">
+                <li>
+                    <input type="text" placeholder="Number of reps" />
+                </li>
+            </ol>
+            <!-- /ko -->
+            <!-- ko if: metricType() == 'weight' -->
+            <ol class="value" data-bind="foreach: exercises">
+                <li>
+                    <input type="text" placeholder="Number of reps" />
+                    <input type="text" placeholder="Weight in KG" />
+                </li>
+            </ol>
+            <!-- /ko -->
+
+            <div class="addRep" data-bind="visible: exercises().length > 0">
+                <input type="button" value="Add rep" data-bind="click: addRep" />
+            </div>
+        </div>
+
+    </section>
+
+    <div class="field action">
+        <input type="button" value="Add another set" data-bind="click: addSet" />
+    </div>
+
+    <div class="field action">
+        <input type="button" value="Save session" />
+    </div>
+
+</fieldset>
+
+

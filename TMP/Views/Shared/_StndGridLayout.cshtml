@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MinLayout.cshtml";
+}
+
+@section koscripts {
+    @RenderSection("koscripts", required: false)
+}
+
+@RenderSection("heading", required: false)
+
+<div class="row">
+    <div class="col-sm-7">
+        @RenderBody()
+    </div>
+    <div class="col-sm-5">
+        @RenderSection("rightPanel", required: false)
+    </div>
+</div>
