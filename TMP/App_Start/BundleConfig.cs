@@ -14,7 +14,8 @@ namespace TMP
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/Scripts/knockout-{version}.js",
-                        "~/Scripts/knockout.validation.min.js"));
+                        "~/Scripts/knockout.validation.min.js",
+                        "~/Scripts/koactions/kobindings.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

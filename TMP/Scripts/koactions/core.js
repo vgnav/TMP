@@ -49,6 +49,10 @@ TMP.Common.logViewChanges = function (model) {
     };
 };
 
+TMP.Common.enableForm = function (model, state) {
+    model['formEnabled'](state);
+};
+
 // start-up functions. Need to do it like this because can't guarantee that JQuery is loaded...
 (function (window, document) {
     window.appInit = (function () {
@@ -79,6 +83,5 @@ TMP.Common.logViewChanges = function (model) {
     }
 
 })(window, document);
-
 
 

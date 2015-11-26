@@ -24,13 +24,26 @@
 .action input[type=button]:hover, .action input[type=submit]:hover, 
 .action button:hover,
 .field .vote input[type=radio] + label,
-.field .vote input[type=radio] + label:hover
+.field .vote input[type=radio] + label:hover,
+.addRep a,
+.addRep a:hover
  {    
     -webkit-transition: background-color 200ms linear;
     -moz-transition: background-color 200ms linear;
     -o-transition: background-color 200ms linear;
     -ms-transition: background-color 200ms linear;
     transition: background-color 200ms linear;
+}
+
+.value.workoutName .actions a,
+.value.workoutName .actions a:hover,
+.metric .removeRep a,
+.metric .removeRep a:hover {
+    -webkit-transition: color 200ms linear;
+    -moz-transition: color 200ms linear;
+    -o-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
 }
 
 input[type=text],
@@ -145,6 +158,9 @@ input[type=text]:focus, select:focus, textara:focus{
     cursor: not-allowed;
 }
 
+.field.newset {
+    margin-bottom: 0px;
+}
 .value.workoutName input[type=text] {
     width: 79%;
 }
@@ -158,17 +174,66 @@ input[type=text]:focus, select:focus, textara:focus{
         clear: both;
         height: 0;
     }
-.value.workoutName a {
-    font-size: 26px;
-    color: #999;
+
+.field.addRep {    
+    margin-bottom: 30px;
 }
-    .value.workoutName a:hover {
-        color: #222;
+.field.addRep em {
+    text-align: left;
+}
+
+.addRepBtn {
+    text-align: center;
+}
+.addRepBtn a {
+    color: #267249;
+    font-size: 26px;
+    display: block;
+    background-color: rgba(208, 236, 172, 0.7);
+    padding: 5px 0px;
+}
+    .addRepBtn a:hover {
+        color: #267249;
+        background-color: rgba(208, 236, 172, 1);
     }
-    .value.workoutName a:hover, .value.workoutName a:focus {
+    .addRepBtn a:hover, .addRepBtn a:focus {
         text-decoration: none;
     }
 
+.value.workoutName .toggler a {
+    margin-right: 10px;
+}
+.value.workoutName a,
+.metric .removeRep a {
+    color: #999;
+    font-size: 26px;
+}
+    .value.workoutName a.glyphicon-remove-circle, .metric .removeRep a {
+        color: #EA2E2E;
+    }
+        .value.workoutName a.glyphicon-remove-circle:hover, .metric .removeRep a:hover {
+            color: #CE0D0D;
+        }
+    .value.workoutName a:hover {
+        color: #999;
+    }
+    .value.workoutName a:hover,
+    .value.workoutName a:focus,
+    .metric .removeRep a:hover,
+    .metric .removeRep a:focus {
+        text-decoration: none;
+    }
+
+ol.metric {
+    list-style: none;
+    padding-left: 0px;
+}
+ol.metric li {
+    padding: 10px;
+    padding-right: 0px;
+    border-bottom: 1px solid #D0ECAC;
+    border-left: 15px solid #D0ECAC;
+}
 .metric li:after {
     content: "";
     display: block;
@@ -183,11 +248,11 @@ input[type=text]:focus, select:focus, textara:focus{
         float: left;
     }
     .metric .weightSet .rep {
-        width: 29%;
-        margin-right: 1%;
+        width: 70px;
+        margin-right: 2px;
     }
     .metric .weightSet .weight {
-        width: 70%;
+        width: 35%;
     }
     .metric .weightSet:after {
         content: "";
@@ -195,6 +260,36 @@ input[type=text]:focus, select:focus, textara:focus{
         clear: both;
         height: 0px;
     }
+    .metric.distance input[type=text],
+    .metric.rep input[type=text] {
+        width: 50%;
+    }
+
+    
+.timeInput,
+.weightSet {
+    display: inline-block;
+}
+.weightSet {
+    width: 100%;
+}
+.timeInput + .removeRep,
+.metric.rep .removeRep,
+.weightSet .removeRep,
+.metric .removeRep {
+    display: inline-block;
+    vertical-align: middle;
+    float: right;    
+}
+
+.timeInput input[type=text] {
+    width: 100px;
+    display: inline;
+}
+.timeInput input[type=text] + span {
+    font-weight: bold;
+    font-size: 24px;
+}
 
 .errorMsg {
     display: block;

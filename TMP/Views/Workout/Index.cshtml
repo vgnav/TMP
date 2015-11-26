@@ -19,103 +19,126 @@
     Loading form
 </section>
 
-<fieldset class="form" id="workoutForm">
+<fieldset class="form" id="workoutForm" data-bind="enable: formEnabled">
     <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
 
-    <section data-bind="foreach: sets">
-        <div class="field">
-            <div class="value workoutName">
-                <input type="text" placeholder="Workout name" data-bind="textInput: workoutName"/>
-                <div class="actions">
-                    <a href="#" title="show / hide workout information" data-bind="click: toggleVisible, visible: workoutName, css: toggleSet() ? 'glyphicon glyphicon-chevron-up' : 'glyphicon glyphicon-chevron-down'"></a>
-                    <a href="#" title="remove this set from workout" class="glyphicon glyphicon-trash" data-bind="click: remove, visible: workoutName"></a>
+    <section data-bind="foreach: {data: sets, beforeRemove: slideUp, afterAdd: slideDown}">
+        <section  class="setDetails">
+            <div class="field newset">
+                <div class="value workoutName">
+                    <input type="text" placeholder="Workout name" data-bind="textInput: workoutName" />
+                    <div class="actions">
+                        <a href="#" title="show / hide workout information" 
+                           data-bind="click: toggleVisible, visible: workoutName, css: toggleSet() ? 'glyphicon glyphicon-minus-sign' : 'glyphicon glyphicon-plus-sign'"></a>
+                        <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: remove, visible: workoutName"></a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="field" data-bind="visible: toggleSet">
+            <div class="field" data-bind="slideVisible: toggleSet">
 
-            <!-- ko if: metricType() == 'time' -->
-            <ol class="value metric time" data-bind="foreach: exercises">
-                <li>
-                    <!-- ko with: metric -->
-                    <input type="text" placeholder="Time" />
-                    <div class="vote vote-2">
-                        <div class="set">
-                            <input type="radio" value="seconds" data-bind="attr: {'name': elId, 'id': elId + '_s'}" checked/>
-                            <label data-bind="attr: {'for': elId + '_s'}">Seconds</label>
+                <!-- ko if: metricType() == 'time' -->
+                <ol class="value metric time" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                    <li>
+                        <!-- ko with: metric -->
+                        <div class="timeInput">
+                            <input type="text" placeholder="Minutes" data-bind="textInput: minutes, numerical: minutes, visible: unit() == 'minute'" />
+                            <span data-bind="visible: unit() == 'minute'">:</span>
+                            <input type="text" placeholder="Seconds" data-bind="textinput: seconds, numerical: seconds" />
                         </div>
-                        <div class="set">
-                            <input type="radio" value="minutes" data-bind="attr: {'name': elId, 'id': elId + '_m'}"/>
-                            <label data-bind="attr: {'for': elId + '_m'}">Minutes</label>
+                        <span class="removeRep">
+                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                        </span>
+                        <div class="vote vote-2">
+                            <div class="set">
+                                <input type="radio" value="second" data-bind="attr: {'name': elId, 'id': elId + '_s'}, checked: unit" />
+                                <label data-bind="attr: {'for': elId + '_s'}">Seconds</label>
+                            </div>
+                            <div class="set">
+                                <input type="radio" value="minute" data-bind="attr: {'name': elId, 'id': elId + '_m'}, checked: unit" />
+                                <label data-bind="attr: {'for': elId + '_m'}">Minutes</label>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /ko -->
-                </li>
-            </ol>
-            <!-- /ko -->
-
-            <!-- ko if: metricType() == 'distance' -->
-            <ol class="value metric distance" data-bind="foreach: exercises">
-                <li>
-                    <!-- ko with: metric -->
-                    <input type="text" placeholder="Distance covered" />
-                    <div class="vote vote-2">
-                        <div class="set">
-                            <input type="radio" value="kilometres" data-bind="attr: {'name': elId, 'id': elId + '_km'}" checked />
-                            <label data-bind="attr: {'for': elId + '_km'}">Kilometres</label>
+                        <!-- /ko -->
+                    </li>
+                </ol>
+                <!-- /ko -->
+                <!-- ko if: metricType() == 'distance' -->
+                <ol class="value metric distance" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                    <li>
+                        <!-- ko with: metric -->
+                        <input type="text" placeholder="Distance" data-bind="textinput: distance, decimal: distance" />
+                        <span class="removeRep">
+                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                        </span>
+                        <div class="vote vote-2">
+                            <div class="set">
+                                <input type="radio" value="km" data-bind="attr: {'name': elId, 'id': elId + '_km'}, checked: unit" />
+                                <label data-bind="attr: {'for': elId + '_km'}">Kilometres</label>
+                            </div>
+                            <div class="set">
+                                <input type="radio" value="mi" data-bind="attr: {'name': elId, 'id': elId + '_m'}, checked: unit" />
+                                <label data-bind="attr: {'for': elId + '_m'}">Miles</label>
+                            </div>
                         </div>
-                        <div class="set">
-                            <input type="radio" value="miles" data-bind="attr: {'name': elId, 'id': elId + '_m'}" />
-                            <label data-bind="attr: {'for': elId + '_m'}">Miles</label>
+                        <!-- /ko -->
+                    </li>
+                </ol>
+                <!-- /ko -->
+                <!-- ko if: metricType() == 'rep' -->
+                <ol class="value metric rep" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                    <li>
+                        <!-- ko with: metric -->
+                        <input type="text" placeholder="Number of reps" data-bind="textinput: reps, numeric: reps" />
+                        <span class="removeRep">
+                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                        </span>
+                        <!-- /ko -->
+                    </li>
+                </ol>
+                <!-- /ko -->
+                <!-- ko if: metricType() == 'weight' -->
+                <ol class="metric value weight" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                    <li>
+                        <!-- ko with: metric -->
+                        <div class="weightSet">
+                            <input type="text" class="rep" placeholder="# reps" data-bind="textinput: reps, numeric: reps" />
+                            <input type="text" class="weight" placeholder="Weight" data-bind="textInput: weight, decimal: weight" />
+                            <span class="removeRep">
+                                <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                            </span>
                         </div>
-                    </div>
-                    <!-- /ko -->
-                </li>
-            </ol>
-            <!-- /ko -->
-
-            <!-- ko if: metricType() == 'rep' -->
-            <ol class="value metric rep" data-bind="foreach: exercises">
-                <li>
-                    <!-- ko with: metric -->
-                    <input type="text" placeholder="Number of reps" />
-                    <!-- /ko -->
-                </li>
-            </ol>
-            <!-- /ko -->
-
-            <!-- ko if: metricType() == 'weight' -->
-            <ol class="metric value weight" data-bind="foreach: exercises">
-                <li>
-                    <!-- ko with: metric -->
-                    <div class="weightSet">
-                        <input type="text" class="rep" placeholder="# of reps" />
-                        <input type="text" class="weight" placeholder="Weight in KG" />
-                    </div>
-                    <div class="vote vote-2">
-                        <div class="set">
-                            <input type="radio" value="kilograms" data-bind="attr: {'name': elId, 'id': elId + '_kg'}" checked />
-                            <label data-bind="attr: {'for': elId + '_kg'}">Kilograms</label>
+                        <div class="vote vote-2">
+                            <div class="set">
+                                <input type="radio" value="kg" data-bind="checked: unit, attr: {'name': elId, 'id': elId + '_kg'}" />
+                                <label data-bind="attr: {'for': elId + '_kg'}">Kilograms</label>
+                            </div>
+                            <div class="set">
+                                <input type="radio" value="lb" data-bind="checked: unit, attr: {'name': elId, 'id': elId + '_lb'}" />
+                                <label data-bind="attr: {'for': elId + '_lb'}">Pounds</label>
+                            </div>
                         </div>
-                        <div class="set">
-                            <input type="radio" value="pounds" data-bind="attr: {'name': elId, 'id': elId + '_lb'}" />
-                            <label data-bind="attr: {'for': elId + '_lb'}">Pounds</label>
-                        </div>
-                    </div>
-                    <!-- /ko -->
-                </li>
-            </ol>
-            <!-- /ko -->
+                        <!-- /ko -->
+                    </li>
+                </ol>
+                <!-- /ko -->
 
-        </div>
-
-        <div class="field">
-            <div class="addRep" data-bind="visible: exercises().length > 0">
-                <input type="button" value="Add rep set" data-bind="click: addRep" />
             </div>
-        </div>
 
+            <div data-bind="visible: !toggleSet()">
+                <em>
+                    <span data-bind="text: exercises().length"></span> rep(s) in this set
+                </em>
+            </div>
+
+            <div class="field addRep" data-bind="visible: toggleSet() && exercises().length > 0">
+                <div class="addRepBtn">
+                    @*<a href="#" data-bind="click: addRep" class="glyphicon glyphicon-plus-sign" title="Add a rep"></a>*@
+                    <a href="#" data-bind="click: addRep" title="Add a rep">add rep</a>
+                </div>
+            </div>
+
+        </section>
     </section>
 
     <div class="field action">

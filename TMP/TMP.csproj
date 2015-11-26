@@ -208,6 +208,7 @@
     <Content Include="Scripts\knockout.validation.min.js" />
     <Content Include="Scripts\koactions\addExercise.js" />
     <Content Include="Scripts\koactions\core.js" />
+    <Content Include="Scripts\koactions\kobindings.js" />
     <Content Include="Scripts\koactions\workout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\notify.min.js" />
