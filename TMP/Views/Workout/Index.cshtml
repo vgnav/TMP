@@ -47,7 +47,7 @@
                             <input type="text" placeholder="Seconds" data-bind="textinput: seconds, numerical: seconds" />
                         </div>
                         <span class="removeRep">
-                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="visible: $parent.set.exercises().length > 1, click: $root.removeRepFromSet"></a>
                         </span>
                         <div class="vote vote-2">
                             <div class="set">
@@ -69,7 +69,7 @@
                         <!-- ko with: metric -->
                         <input type="text" placeholder="Distance" data-bind="textinput: distance, decimal: distance" />
                         <span class="removeRep">
-                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="visible: $parent.set.exercises().length > 1, click: $root.removeRepFromSet"></a>
                         </span>
                         <div class="vote vote-2">
                             <div class="set">
@@ -91,7 +91,7 @@
                         <!-- ko with: metric -->
                         <input type="text" placeholder="Number of reps" data-bind="textinput: reps, numeric: reps" />
                         <span class="removeRep">
-                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                            <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="visible: $parent.set.exercises().length > 1, click: $root.removeRepFromSet"></a>
                         </span>
                         <!-- /ko -->
                     </li>
@@ -105,7 +105,7 @@
                             <input type="text" class="rep" placeholder="# reps" data-bind="textinput: reps, numeric: reps" />
                             <input type="text" class="weight" placeholder="Weight" data-bind="textInput: weight, decimal: weight" />
                             <span class="removeRep">
-                                <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="click: $root.removeRepFromSet"></a>
+                                <a href="#" title="remove this set from workout" class="glyphicon glyphicon-remove-circle" data-bind="visible: $parent.set.exercises().length > 1, click: $root.removeRepFromSet"></a>
                             </span>
                         </div>
                         <div class="vote vote-2">
