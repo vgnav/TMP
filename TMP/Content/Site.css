@@ -357,6 +357,55 @@ ol.metric li {
                 background-color: #eee;
                 text-decoration: none;
             }
+
+
+.pagination:before, .pagination:after {
+    content: "";
+    height: 0;
+    display: block;
+    clear: both;
+}
+
+.workoutPicker .pagination {
+    display: block;
+    text-align: left;
+}
+
+    .pagination .page {
+        display: inline-block;
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 3px;
+        min-width: 40px;
+        text-align: center;
+    }
+    .pagination .page.curr {
+        border: 2px solid #999;
+        background-color: #eee;
+    }
+    .pagination a, .pagination a:hover, .pagination a:focus {
+        text-decoration: none;
+    }
+    .pagination .navButtons {
+        font-size: 24px;        
+    }
+    .pagination .navButtons:after {
+        content: "";
+        height: 0;
+        display: block;
+        clear: both;
+    }
+    .pagination .navButtons a {
+        display: inline-block;
+        margin-right: 10px;
+    }
+        
+        .pagination .navButtons a {
+            color: #666;
+        }
+            .pagination .navButtons a[state=disabled] {
+                color: #ddd;
+            }
 ::-webkit-input-placeholder {
    color: #999;
 }

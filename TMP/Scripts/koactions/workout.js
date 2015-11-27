@@ -22,16 +22,116 @@
             self.sets = ko.observableArray();
             self.sets.push(new Set());
             self.formEnabled = ko.observable(true);
+        };      
 
+        Workout.prototype.addSet = function () {
+            var self = this;
+            self.sets.push(new Set());
+        };
+        Workout.prototype.removeRepFromSet = function (exc) {
+            if (exc.exercise.set.exercises().length <= 1) {
+                alert(config.cannotRemoveTheOnlyRep);
+                return;
+            }
+            var set = exc.exercise.set;
+            set.exercises.remove(exc.exercise);
+            // toastr.info('Rep deleted');
+        };
+        Workout.prototype.slideDown = function (element) {
+            $(element).hide().slideDown('fast');
+        };
+        Workout.prototype.slideUp = function (element) {
+            $(element).slideUp('fast', function () {
+                $(element).remove();
+            });
         };
 
         var AllWorkoutTypes = function () {
             var self = this;
             self.allWorkoutTypes = ko.observableArray();
+            self.filteredWorkoutTypes = ko.observableArray();
             self.selected = ko.observable();
             self.loadAllWorkouts();
+            self.workoutNameFilter = ko.observable();
+            self.workoutNameFilter.extend({ rateLimit: { timeout: 1000, method: 'notifyWhenChangesStop' } });
+
+            //filter the items using the filter text
+            self.filteredWorkoutTypes = ko.computed(function () {
+                var nameFilter = self.workoutNameFilter();
+                if (!nameFilter || nameFilter.length == 0) {
+                    return self.allWorkoutTypes();
+                }
+                else {
+                    nameFilter = nameFilter.toLowerCase();
+                    return ko.utils.arrayFilter(self.allWorkoutTypes(), function (item) {
+                        var exerciseName = item.ExerciseName.toLowerCase();
+                        return TMP.Common.stringStartsWith(exerciseName, nameFilter) || TMP.Common.stringContains(exerciseName, nameFilter);
+                    });
+                }
+            });
+            self.loadPagination();
         };
 
+        AllWorkoutTypes.prototype.loadPagination = function () {
+            var self = this;
+
+            // pagination
+            self.pageNumber = ko.observable(0);
+            self.nbPerPage = 5;
+            self.threshold = 3;
+            self.totalPagesHolder = ko.observableArray([]);
+            self.totalPages = ko.computed(function () {
+                var div = Math.floor(self.filteredWorkoutTypes().length / self.nbPerPage);
+                div += self.filteredWorkoutTypes().length % self.nbPerPage > 0 ? 1 : 0;
+                var pages = div - 1;
+
+                self.totalPagesHolder.removeAll();
+                var totalPages = pages + 1;
+
+                if (totalPages > self.threshold) {
+                    var start = self.pageNumber();
+                    if (start == 0)++start;
+                    if (start > totalPages)--start;
+
+                    for (var i = 0; i < self.threshold; i++) {
+                        self.totalPagesHolder.push(start + i);
+                        if (start + 1 + i > totalPages)
+                            break;
+                    }
+                    if (start + self.threshold <= totalPages)
+                        self.totalPagesHolder.push(pages + 1);
+
+                } else {
+                    for (var i = 0; i < totalPages; i++) {
+                        self.totalPagesHolder.push(i + 1);
+                    }
+                }
+                return div - 1;
+            });
+            self.paginated = ko.computed(function () {
+                var first = self.pageNumber() * self.nbPerPage;
+                return self.filteredWorkoutTypes().slice(first, first + self.nbPerPage);
+            });
+            self.hasPrevious = ko.computed(function () {
+                return self.pageNumber() !== 0;
+            });
+            self.hasNext = ko.computed(function () {
+                return self.pageNumber() !== self.totalPages();
+            });
+            self.next = function () {
+                if (self.pageNumber() < self.totalPages()) {
+                    self.pageNumber(self.pageNumber() + 1);
+                }
+            };
+            self.previous = function () {
+                if (self.pageNumber() != 0) {
+                    self.pageNumber(self.pageNumber() - 1);
+                }
+            };
+            self.pageController = function (targetPage) {
+                return self.pageNumber(targetPage - 1);
+            };
+        }
         AllWorkoutTypes.prototype.loadAllWorkouts = function () {
             var self = this;
             for (var i in AllWorkouts) {
@@ -42,12 +142,6 @@
         AllWorkoutTypes.prototype.selectItem = function (el) {
             _allWorkouts.selected(el);
         };
-
-        Workout.prototype.addSet = function () {
-            var self = this;
-            self.sets.push(new Set());
-        };
-
 
         var Set = function () {
             var self = this;
@@ -108,7 +202,6 @@
             });            
         }
 
-
         Set.prototype.selectWorkout = function (currentSet) {
             var self = this;
             var modal = $('.workoutPicker').remodal();
@@ -116,12 +209,14 @@
             // however, if we dont 'unbind' the event handler once its done its work, the binding from call 1 and call 2
             // will both be called
             $(document).on('closed', '.workoutPicker', function (e) {
-                currentSet.workoutSelected(_allWorkouts.selected());
-                $(document).unbind('closed'); 
+                $(document).unbind('closed');
+                var selected = _allWorkouts.selected();                
+                if (!selected || selected.ExerciseName == currentSet.workoutName()) return;
+                currentSet.workoutSelected(selected);
+                _allWorkouts.selected(null);
             });
             modal.open();            
         };
-
         Set.prototype.addRep = function () {
             var self = this;
             var prev = null;
@@ -129,35 +224,14 @@
             self.exercises.push(new Exercise(self));
             self.toggleSet(true);
         };
-
         Set.prototype.toggleVisible = function () {
             this.toggleSet(!this.toggleSet());
         };
-
         Set.prototype.remove = function (set) {
             if (window.confirm(config.confirmSetRemove)) {
                 _model.sets.remove(set);
             }
         };
-
-        Workout.prototype.removeRepFromSet = function (exc) {
-            if (exc.exercise.set.exercises().length <= 1) {
-                alert(config.cannotRemoveTheOnlyRep);
-                return;
-            }
-            var set = exc.exercise.set;
-            set.exercises.remove(exc.exercise);
-            // toastr.info('Rep deleted');
-        };
-        Workout.prototype.slideDown = function (element) {            
-            $(element).hide().slideDown('fast');
-        };
-        Workout.prototype.slideUp = function (element) {
-            $(element).slideUp('fast', function () {
-                $(element).remove();
-            });
-        };
-
 
         var Exercise = function (set) {
             var self = this;
@@ -171,67 +245,64 @@
             return prefix + '_' + (++_idCount) + '_';
         }
 
-            var TimeMetric = function (exercise) {
-                var self = this;
-                self.exercise = exercise;
-                self.time = ko.observable();
-                self.calories = ko.observable();
+        var TimeMetric = function (exercise) {
+            var self = this;
+            self.exercise = exercise;
+            self.time = ko.observable();
+            self.calories = ko.observable();
 
-                self.minutes = ko.observable();
-                self.seconds = ko.observable();
+            self.minutes = ko.observable();
+            self.seconds = ko.observable();
 
-                self.unit = ko.observable('second');
+            self.unit = ko.observable('second');
 
-                self.elId = getNewId('time');
-            };
+            self.elId = getNewId('time');
+        };
+        var DistanceMetric = function (exercise) {
+            var self = this;
+            self.exercise = exercise;
+            self.distance = ko.observable();
+            self.calories = ko.observable();
 
-            var DistanceMetric = function (exercise) {
-                var self = this;
-                self.exercise = exercise;
-                self.distance = ko.observable();
-                self.calories = ko.observable();
+            self.unit = ko.observable('km');
+            self.unit.subscribe(function (value) {
+                if (!value) return;
+                if (!self.distance()) return;
+                if (value == 'km') {
+                    self.distance((self.distance() / 0.621371).toFixed(2));
+                } else if (value == 'mi') {
+                    self.distance((self.distance() * 0.621371).toFixed(2));
+                }
+            });
 
-                self.unit = ko.observable('km');
-                self.unit.subscribe(function (value) {
-                    if (!value) return;
-                    if (!self.distance()) return;
-                    if (value == 'km') {
-                        self.distance((self.distance() / 0.621371).toFixed(2));
-                    } else if (value == 'mi') {
-                        self.distance((self.distance() * 0.621371).toFixed(2));
-                    }
-                });
+            self.elId = getNewId('distance');
+        };
+        var RepMetric = function (exercise) {
+            var self = this;
+            self.exercise = exercise;
+            self.reps = ko.observable();
 
-                self.elId = getNewId('distance');
-            };
+            self.elId = getNewId('rep');
+        };
+        var WeightMetric = function (exercise) {
+            var self = this;
+            self.exercise = exercise;
+            self.reps = ko.observable();
+            self.weight = ko.observable();
 
-            var RepMetric = function (exercise) {
-                var self = this;
-                self.exercise = exercise;
-                self.reps = ko.observable();
+            self.elId = getNewId('weight');
 
-                self.elId = getNewId('rep');
-            };
-
-            var WeightMetric = function (exercise) {
-                var self = this;
-                self.exercise = exercise;
-                self.reps = ko.observable();
-                self.weight = ko.observable();
-
-                self.elId = getNewId('weight');
-
-                self.unit = ko.observable('kg');
-                self.unit.subscribe(function (value) {
-                    if (!value) return;
-                    if (!self.weight()) return;
-                    if (value == 'kg') {
-                        self.weight((self.weight() / 2.20462).toFixed(2));
-                    } else if (value == 'lb') {
-                        self.weight((self.weight() * 2.20462).toFixed(2));
-                    }
-                });
-            };
+            self.unit = ko.observable('kg');
+            self.unit.subscribe(function (value) {
+                if (!value) return;
+                if (!self.weight()) return;
+                if (value == 'kg') {
+                    self.weight((self.weight() / 2.20462).toFixed(2));
+                } else if (value == 'lb') {
+                    self.weight((self.weight() * 2.20462).toFixed(2));
+                }
+            });
+        };
 
         var metricTemplates = {
             'distance': DistanceMetric,

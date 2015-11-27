@@ -53,6 +53,18 @@ TMP.Common.enableForm = function (model, state) {
     model['formEnabled'](state);
 };
 
+TMP.Common.stringStartsWith = function (string, startsWith) {          
+    string = string || "";
+    if (startsWith.length > string.length)
+        return false;
+    return string.substring(0, startsWith.length) === startsWith;
+};
+
+TMP.Common.stringContains = function (str, sub) {
+    str = str || '';
+    return str.indexOf(sub) > -1;
+};
+
 // start-up functions. Need to do it like this because can't guarantee that JQuery is loaded...
 (function (window, document) {
     window.appInit = (function () {
