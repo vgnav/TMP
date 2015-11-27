@@ -7,6 +7,10 @@
 }
 
 @section koscripts {
+    <script type="text/javascript">
+        var AllWorkouts = @Html.Raw(Json.Encode(ViewBag.AllWorkoutTypes))
+    </script>
+
     <script src="~/Scripts/koactions/core.js" type="text/javascript"></script>
     <script src="~/Scripts/koactions/workout.js" type="text/javascript"></script>
 }
@@ -22,11 +26,30 @@
 <fieldset class="form" id="workoutForm" data-bind="enable: formEnabled">
     <input type="hidden" id="requestVerificationToken" value="@Helpers.Instance.GetAntiForgeryToken()" />
 
+
+    <section class="remodal workoutPicker" data-remodal-id="workoutPickerModal" data-remodal-options="closeOnEscape: true">
+        <button data-remodal-action="close" class="remodal-close"></button>
+
+        <input type="text" placeholder="Filter by name" />
+        <select>
+            <option>
+                Filter by type
+            </option>
+        </select>
+        <ul data-bind="foreach: allWorkoutTypes">
+            <li>
+                <a href="#" data-remodal-action="confirm" data-bind="click: $parent.selectItem, text: ExerciseName, attr: {'data-index': $index}"></a>
+            </li>
+        </ul>
+        <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+    </section>
+
+
     <section data-bind="foreach: {data: sets, beforeRemove: slideUp, afterAdd: slideDown}">
         <section  class="setDetails">
             <div class="field newset">
                 <div class="value workoutName">
-                    <input type="text" placeholder="Workout name" data-bind="textInput: workoutName" />
+                    <input type="text" placeholder="Workout name" data-bind="textInput: workoutName, click: selectWorkout"/>                    
                     <div class="actions">
                         <a href="#" title="show / hide workout information" 
                            data-bind="click: toggleVisible, visible: workoutName, css: toggleSet() ? 'glyphicon glyphicon-minus-sign' : 'glyphicon glyphicon-plus-sign'"></a>

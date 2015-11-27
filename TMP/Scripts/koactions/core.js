@@ -73,6 +73,7 @@ TMP.Common.enableForm = function (model, state) {
                 'hideMethod': 'fadeOut',
                 'newestOnTop': true
             }
+
         };
 
         return app;

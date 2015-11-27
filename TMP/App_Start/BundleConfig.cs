@@ -10,7 +10,8 @@ namespace TMP
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/toastr.min.js"));
+                        "~/Scripts/toastr.min.js",
+                        "~/Scripts/remodal.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/Scripts/knockout-{version}.js",
@@ -31,6 +32,8 @@ namespace TMP
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/remodal.css",
+                      "~/Content/remodal-default-theme.css",
                       "~/Content/toastr.min.css",
                       "~/Content/site.css"));
 

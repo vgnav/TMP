@@ -328,8 +328,35 @@ ol.metric li {
         display: block;
         width: 100%;
     }
-    
 
+.workoutPicker ul {
+    list-style: none;  
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;      
+}
+    .workoutPicker ul:after {
+        content: "";
+        height: 0;
+        display: block;
+        clear: both;
+
+    }
+    .workoutPicker ul li {
+        width: 100%;
+    }    
+        .workoutPicker ul a {
+            color: #222;
+            display: block;
+            text-align: left;
+            background-color: #dedede;
+            margin: 5px;
+            padding: 10px;
+        }
+            .workoutPicker ul a:hover {
+                background-color: #eee;
+                text-decoration: none;
+            }
 ::-webkit-input-placeholder {
    color: #999;
 }
