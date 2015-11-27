@@ -187,10 +187,12 @@ input[type=text]:focus, select:focus, textara:focus{
 }
 .addRepBtn a {
     color: #267249;
-    font-size: 26px;
+    font-size: 18px;
     display: block;
     background-color: rgba(208, 236, 172, 0.7);
-    padding: 5px 0px;
+    padding: 10px 0px;
+    width: 200px;
+    float: right;
 }
     .addRepBtn a:hover {
         color: #267249;
@@ -229,8 +231,7 @@ ol.metric {
     padding-left: 0px;
 }
 ol.metric li {
-    padding: 10px;
-    padding-right: 0px;
+    padding: 10px 0px 0px 10px;
     border-bottom: 1px solid #D0ECAC;
     border-left: 15px solid #D0ECAC;
 }

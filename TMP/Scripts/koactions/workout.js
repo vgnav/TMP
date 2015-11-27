@@ -13,7 +13,8 @@
                 4: 'weight'
             },
             confirmSetRemove: 'Are you sure you want to remove this set from the workout?',
-            confirmRepRemove: 'Are you sure you want to remove this rep?'
+            confirmRepRemove: 'Are you sure you want to remove this rep?',
+            cannotRemoveTheOnlyRep: 'Can\'t remove the only rep'
         };
 
         var Workout = function () {
@@ -93,7 +94,7 @@
 
         Workout.prototype.removeRepFromSet = function (exc) {
             if (exc.exercise.set.exercises().length <= 1) {
-                alert('Can\'t remove the only rep');
+                alert(config.cannotRemoveTheOnlyRep);
                 return;
             }
             var set = exc.exercise.set;
