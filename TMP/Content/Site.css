@@ -51,6 +51,7 @@ select,
 textarea {
     padding: 7px;
     border: 1px solid #ddd;
+    border-radius: 0;
 }
 
 input[type=text] {

@@ -31,10 +31,8 @@
         <button data-remodal-action="close" class="remodal-close"></button>
 
         <input type="text" placeholder="Find by workout name" data-bind="textinput: workoutNameFilter"/>
-        <select>
-            <option>
-                Find by workout type
-            </option>
+        <select data-bind="options: filterTypeOptions, optionsCaption: 'Filter by workout type', value: filterTypeSelected">
+                        
         </select>
         
         <div class="pagination" data-bind="visible: totalPagesHolder().length > 1">

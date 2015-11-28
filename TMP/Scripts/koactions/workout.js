@@ -12,6 +12,7 @@
                 3: 'rep',
                 4: 'weight'
             },
+            filterMetricTypes: ['Distance', 'Time', 'Rep', 'Weight'],
             confirmSetRemove: 'Are you sure you want to remove this set from the workout?',
             confirmRepRemove: 'Are you sure you want to remove this rep?',
             cannotRemoveTheOnlyRep: 'Can\'t remove the only rep'
@@ -53,19 +54,33 @@
             self.selected = ko.observable();
             self.loadAllWorkouts();
             self.workoutNameFilter = ko.observable();
-            self.workoutNameFilter.extend({ rateLimit: { timeout: 1000, method: 'notifyWhenChangesStop' } });
+            self.workoutNameFilter.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });
+            self.filterTypeOptions = config.filterMetricTypes;
+            self.filterTypeSelected = ko.observable();
+            self.filterType = ko.pureComputed(function () {
+                return self.filterTypeOptions.indexOf(self.filterTypeSelected()) + 1;
+            });
 
             //filter the items using the filter text
             self.filteredWorkoutTypes = ko.computed(function () {
-                var nameFilter = self.workoutNameFilter();
-                if (!nameFilter || nameFilter.length == 0) {
+                var nameFilter = self.workoutNameFilter() || '';
+                var exerciseType = self.filterType() || 0;
+                if (nameFilter.length == 0 && exerciseType == 0) {
                     return self.allWorkoutTypes();
                 }
                 else {
                     nameFilter = nameFilter.toLowerCase();
                     return ko.utils.arrayFilter(self.allWorkoutTypes(), function (item) {
-                        var exerciseName = item.ExerciseName.toLowerCase();
-                        return TMP.Common.stringStartsWith(exerciseName, nameFilter) || TMP.Common.stringContains(exerciseName, nameFilter);
+                        if (!exerciseType) {
+                            var exerciseName = item.ExerciseName.toLowerCase();
+                            return TMP.Common.stringStartsWith(exerciseName, nameFilter) || TMP.Common.stringContains(exerciseName, nameFilter);
+                        } else if (nameFilter.length == 0) {
+                            return (+item.MetricType) == exerciseType;
+                        } else {
+                            var exerciseName = item.ExerciseName.toLowerCase();
+                            return (TMP.Common.stringStartsWith(exerciseName, nameFilter) || TMP.Common.stringContains(exerciseName, nameFilter)) && ((+item.MetricType) == exerciseType);
+                        }
+                        return false;
                     });
                 }
             });

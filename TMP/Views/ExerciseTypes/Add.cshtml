@@ -31,9 +31,9 @@
     </div>
 
     <div class="field" data-bind="visible: exerciseName()">
-        <div class="label">
+        @*<div class="label">
             <label>Is this a cardio or resistance (weights) workout?</label>
-        </div>
+        </div>*@
         <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="cardio" name="exerciseType" data-bind="checked: baseType" value="cardio" />
@@ -47,9 +47,9 @@
     </div>
 
     <div class="field" data-bind="visible: baseType() == 'cardio' && exerciseName()">
-        <div class="label">
+        @*<div class="label">
             <label>Will this workout be measured using time or distance?</label>
-        </div>
+        </div>*@
         <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="time" name="metricType" data-bind="checked: metricType" value="time" />
@@ -64,9 +64,9 @@
     </div>
 
     <div class="field" data-bind="visible: baseType() == 'resistance' && exerciseName()">
-        <div class="label">
+        @*<div class="label">
             <label>Will free-weights be used or body weight?</label>
-        </div>
+        </div>*@
         <div class="value vote vote-2" data-bind="validationOptions: { insertMessages: false}">
             <div class="set">
                 <input type="radio" id="freeweight" name="metricType" data-bind="checked: metricType" value="weight" />
