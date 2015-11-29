@@ -330,34 +330,86 @@ ol.metric li {
         width: 100%;
     }
 
-.workoutPicker ul {
+.workoutPicker .allWorkouts ul {
     list-style: none;  
     margin: 0;
     margin-bottom: 10px;
     padding: 0;      
 }
-    .workoutPicker ul:after {
+    .workoutPicker .allWorkouts ul:after {
         content: "";
         height: 0;
         display: block;
         clear: both;
 
     }
-    .workoutPicker ul li {
+    .workoutPicker .allWorkouts ul li {
         width: 100%;
     }    
-        .workoutPicker ul a {
+        .workoutPicker .allWorkouts ul a {
             color: #222;
             display: block;
             text-align: left;
-            background-color: #dedede;
+            background-color: #eee;
             margin: 5px;
             padding: 10px;
         }
-            .workoutPicker ul a:hover {
+            .workoutPicker .allWorkouts ul a:hover {
                 background-color: #eee;
                 text-decoration: none;
             }
+
+
+.filterExerciseType {
+    margin-top: 5px;    
+    margin-bottom: 10px;
+}
+
+    .filterExerciseType ul {        
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .filterExerciseType ul:after{
+        content: "";
+        height: 0;
+        display: block;
+        clear: both;
+    }
+    .filterExerciseType ul li {
+        display: inline-block;
+    }
+    .filterExerciseType ul label {
+        font-weight: normal;
+    }
+    .filterExerciseType ul input[type=radio] {
+        display: none;
+    }
+    .filterExerciseType ul input[type=radio]:checked + label[class^="fitnessForever-"]:before {
+        padding: 15px;
+    }    
+        .filterExerciseType ul input[type=radio]:checked + .fitnessForever-distance:before {
+            background-color: #FFAAAA;
+        }
+        .filterExerciseType ul input[type=radio]:checked + .fitnessForever-time:before {
+            background-color: #FFE4AA;
+        }
+        .filterExerciseType ul input[type=radio]:checked + .fitnessForever-reps:before {
+            background-color: #FFFEAA;
+        }
+        .filterExerciseType ul input[type=radio]:checked + .fitnessForever-weights:before {
+            background-color: #D9F0A0;
+        }
+    .filterExerciseType ul input[type=radio] + label[class^="fitnessForever-"]:before {
+        font-size: 18px;        
+        padding: 9px;
+        background-color: #ddd;
+    }
+    .filterExerciseType ul .clear .glyphicon {
+        font-size: 26px;
+        color: #EA2E2E;
+        top: 5px;
+    }
 
 
 .pagination:before, .pagination:after {
@@ -399,14 +451,11 @@ ol.metric li {
     .pagination .navButtons a {
         display: inline-block;
         margin-right: 10px;
+        color: #666;
     }
-        
-        .pagination .navButtons a {
-            color: #666;
+        .pagination .navButtons a[state=disabled] {
+            color: #ddd;
         }
-            .pagination .navButtons a[state=disabled] {
-                color: #ddd;
-            }
 
 .fitnessForever-1:before,
 .fitnessForever-distance:before,
@@ -426,17 +475,18 @@ ol.metric li {
 .fitnessForever-distance:before,
 .fitnessForever-1:before{
     background-color: #FFAAAA;
-    font-family: 'Glyphicons Halflings';
+    content: "\e02f";
+    /*font-family: 'Glyphicons Halflings';
     content: "\e062";    
     font-size: 20px;
     padding-left: 11px;
-    padding-right: 11px;
+    padding-right: 11px;*/
 }
 
 .fitnessForever-time:before,
 .fitnessForever-2:before{    
     background-color: #FFE4AA;
-    content: "\e00b";
+    content: "\e00c";
 }
 
 .fitnessForever-reps:before,
@@ -450,6 +500,17 @@ ol.metric li {
     background-color: #D9F0A0;
     content: "\e010";
 }
+
+/*.selectOverride {
+    border: 1px solid #000;
+}
+.selectOverride ul {
+    display: none;
+    position: absolute;
+}
+.workoutPicker .selectOverride {
+    display: inline-block;
+}*/
 
 ::-webkit-input-placeholder {
    color: #999;

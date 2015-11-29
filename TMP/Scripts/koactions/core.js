@@ -65,6 +65,15 @@ TMP.Common.stringContains = function (str, sub) {
     return str.indexOf(sub) > -1;
 };
 
+TMP.Common.slideDown = function (element) {
+    $(element).hide().slideDown('fast');
+};
+TMP.Common.slideUp = function (element) {
+    $(element).slideUp('fast', function () {
+        $(element).remove();
+    });
+};
+
 // start-up functions. Need to do it like this because can't guarantee that JQuery is loaded...
 (function (window, document) {
     window.appInit = (function () {

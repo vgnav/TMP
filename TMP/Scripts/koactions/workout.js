@@ -38,14 +38,6 @@
             set.exercises.remove(exc.exercise);
             // toastr.info('Rep deleted');
         };
-        Workout.prototype.slideDown = function (element) {
-            $(element).hide().slideDown('fast');
-        };
-        Workout.prototype.slideUp = function (element) {
-            $(element).slideUp('fast', function () {
-                $(element).remove();
-            });
-        };
 
         var AllWorkoutTypes = function () {
             var self = this;
@@ -55,6 +47,7 @@
             self.loadAllWorkouts();
             self.workoutNameFilter = ko.observable();
             self.workoutNameFilter.extend({ rateLimit: { timeout: 500, method: 'notifyWhenChangesStop' } });
+
             self.filterTypeOptions = config.filterMetricTypes;
             self.filterTypeSelected = ko.observable();
             self.filterType = ko.pureComputed(function () {

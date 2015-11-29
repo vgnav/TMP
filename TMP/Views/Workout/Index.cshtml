@@ -31,9 +31,32 @@
         <button data-remodal-action="close" class="remodal-close"></button>
 
         <input type="text" placeholder="Find by workout name" data-bind="textinput: workoutNameFilter"/>
-        <select data-bind="options: filterTypeOptions, optionsCaption: 'Filter by workout type', value: filterTypeSelected">
-                        
-        </select>
+        @*<select data-bind="options: filterTypeOptions, optionsCaption: 'Filter by workout type', value: filterTypeSelected"></select>*@
+
+        <div class="filterExerciseType">
+            <ul>
+                <li>
+                    <input type="radio" name="filter" id="filter_distance" value="Distance" data-bind="checked: filterTypeSelected"/>
+                    <label href="#" class="fitnessForever-distance" for="filter_distance"></label>
+                </li>
+                <li>
+                    <input type="radio" name="filter" id="filter_time"  value="Time" data-bind="checked: filterTypeSelected"/>
+                    <label href="#" class="fitnessForever-time" for="filter_time"></label>
+                </li>
+                <li>
+                    <input type="radio" name="filter" id="filter_reps"  value="Rep" data-bind="checked: filterTypeSelected"/>
+                    <label href="#" class="fitnessForever-reps" for="filter_reps"></label>
+                </li>
+                <li>
+                    <input type="radio" name="filter" id="filter_weight"  value="Weight" data-bind="checked: filterTypeSelected"/>
+                    <label href="#" class="fitnessForever-weights" for="filter_weight"></label>
+                </li>
+                <li class="clear">
+                    <input type="radio" name="filter" id="filter_none"  value="" data-bind="checked: filterTypeSelected"/>
+                    <label href="#" class="glyphicon glyphicon-remove-circle" for="filter_none"></label>
+                </li>
+            </ul>
+        </div>
         
         <div class="pagination" data-bind="visible: totalPagesHolder().length > 1">
             <!-- ko foreach: totalPagesHolder -->
@@ -47,7 +70,7 @@
         </div>
 
         <div class="workoutList allWorkouts">
-            <ul data-bind="foreach: paginated">
+            <ul data-bind="foreach: {data: paginated, beforeRemove: TMP.Common.slideUp, afterAdd: TMP.Common.slideDown }">
                 <li>
                     <a href="#" data-remodal-action="confirm" data-bind="click: $parent.selectItem, text: ExerciseName, attr: {'data-index': $index, 'class': 'fitnessForever-' + MetricType}"></a>
                 </li>
@@ -57,7 +80,7 @@
     </section>
 
 
-    <section data-bind="foreach: {data: sets, beforeRemove: slideUp, afterAdd: slideDown}">
+    <section data-bind="foreach: {data: sets, beforeRemove: TMP.Common.slideUp, afterAdd: TMP.Common.slideDown}">
         <section  class="setDetails">
             <div class="field newset">
                 <div class="value workoutName">
@@ -73,7 +96,7 @@
             <div class="field" data-bind="slideVisible: toggleSet">
 
                 <!-- ko if: metricType() == 'time' -->
-                <ol class="value metric time" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                <ol class="value metric time" data-bind="foreach: {data: exercises, beforeRemove: TMP.Common.slideUp, afterAdd: TMP.Common.slideDown }">
                     <li>
                         <!-- ko with: metric -->
                         <div class="timeInput">
@@ -99,7 +122,7 @@
                 </ol>
                 <!-- /ko -->
                 <!-- ko if: metricType() == 'distance' -->
-                <ol class="value metric distance" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                <ol class="value metric distance" data-bind="foreach: {data: exercises, beforeRemove: TMP.Common.slideUp, afterAdd: TMP.Common.slideDown }">
                     <li>
                         <!-- ko with: metric -->
                         <input type="text" placeholder="Distance" data-bind="textinput: distance, decimal: distance" />
@@ -121,7 +144,7 @@
                 </ol>
                 <!-- /ko -->
                 <!-- ko if: metricType() == 'rep' -->
-                <ol class="value metric rep" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                <ol class="value metric rep" data-bind="foreach: {data: exercises, beforeRemove: TMP.Common.slideUp, afterAdd: TMP.Common.slideDown }">
                     <li>
                         <!-- ko with: metric -->
                         <input type="text" placeholder="Number of reps" data-bind="textinput: reps, numeric: reps" />
@@ -133,7 +156,7 @@
                 </ol>
                 <!-- /ko -->
                 <!-- ko if: metricType() == 'weight' -->
-                <ol class="metric value weight" data-bind="foreach: {data: exercises, beforeRemove: $root.slideUp, afterAdd: $root.slideDown }">
+                <ol class="metric value weight" data-bind="foreach: {data: exercises, beforeRemove: TMP.Common.slideUp, afterAdd: TMP.Common.slideDown }">
                     <li>
                         <!-- ko with: metric -->
                         <div class="weightSet">
