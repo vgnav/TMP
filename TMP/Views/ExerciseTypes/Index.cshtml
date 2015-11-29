@@ -1,5 +1,7 @@
 ﻿@using TMP.Domain.Entities.Exercises
+@using TMP.Domain.Entities
 @using System.Collections.Generic
+
 
 @model IEnumerable<ExerciseType>
 
@@ -19,8 +21,32 @@
     @foreach (var exerciseType in Model)
     {
         <li>
-            @exerciseType.ExerciseName
-        </li>
+            <span>
+                @exerciseType.ExerciseName
+            </span>
+            <span class="type">
+                @{
+                    switch (exerciseType.MetricType)
+                    {
+                        case MetricType.DISTANCE:
+                            <span class="fitnessForever-bike15">Distance</span>
+                            break;
+                        case MetricType.TIME:
+                            <span class="fitnessForever-chronometer19">Time</span>
+                            break;
+                        case MetricType.REP:
+                            <span class="fitnessForever-flexions">Body weight reps</span>
+                            break;
+                        case MetricType.WEIGHT:
+                            <span class="fitnessForever-dumbbell24">Free weight</span>
+                            break;
+                        default:
+                            <span>Unknown</span>
+                            break;
+                    }
+                }
+            </span>
+       </li>
     }
 </ul>
 

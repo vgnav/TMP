@@ -189,15 +189,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fitnessForever.css" />
     <Content Include="Content\remodal-default-theme.css" />
     <Content Include="Content\remodal.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fitnessForever\fitnessForever.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fitnessForever\fitnessForever.eot" />
+    <Content Include="fonts\fitnessForever\fitnessForever.ttf" />
+    <Content Include="fonts\fitnessForever\fitnessForever.woff" />
     <None Include="Properties\PublishProfiles\navtmpweb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

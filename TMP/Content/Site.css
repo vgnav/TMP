@@ -407,6 +407,50 @@ ol.metric li {
             .pagination .navButtons a[state=disabled] {
                 color: #ddd;
             }
+
+.fitnessForever-1:before,
+.fitnessForever-distance:before,
+.fitnessForever-2:before,
+.fitnessForever-time:before,
+.fitnessForever-3:before,
+.fitnessForever-reps:before,
+.fitnessForever-4:before,
+.fitnessForever-weights:before {
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 24px;
+    margin-right: 7px;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+}
+
+.fitnessForever-distance:before,
+.fitnessForever-1:before{
+    background-color: #FFAAAA;
+    font-family: 'Glyphicons Halflings';
+    content: "\e062";    
+    font-size: 20px;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.fitnessForever-time:before,
+.fitnessForever-2:before{    
+    background-color: #FFE4AA;
+    content: "\e00b";
+}
+
+.fitnessForever-reps:before,
+.fitnessForever-3:before{
+    background-color: #FFFEAA;
+    content: "\e016";
+}
+
+.fitnessForever-weights:before,
+.fitnessForever-4:before{
+    background-color: #D9F0A0;
+    content: "\e010";
+}
+
 ::-webkit-input-placeholder {
    color: #999;
 }

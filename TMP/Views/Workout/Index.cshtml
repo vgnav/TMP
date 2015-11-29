@@ -49,7 +49,7 @@
         <div class="workoutList allWorkouts">
             <ul data-bind="foreach: paginated">
                 <li>
-                    <a href="#" data-remodal-action="confirm" data-bind="click: $parent.selectItem, text: ExerciseName, attr: {'data-index': $index, 'class': MetricType}"></a>
+                    <a href="#" data-remodal-action="confirm" data-bind="click: $parent.selectItem, text: ExerciseName, attr: {'data-index': $index, 'class': 'fitnessForever-' + MetricType}"></a>
                 </li>
             </ul>
         </div>

@@ -33,7 +33,11 @@ namespace TMP.BLL.Services.Exercise
 
             using (var repo = new ExerciseTypeRepository(_dbKey))
             {
-                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName.Trim(), StringComparison.OrdinalIgnoreCase));
+                var matcingExercises = repo.Find(dbExc => 
+                    dbExc.ExerciseName.Equals(exercise.ExerciseName.Trim(), StringComparison.OrdinalIgnoreCase)
+                    &&
+                    dbExc.MetricType == exercise.MetricType
+                    );
                 if (matcingExercises != null && matcingExercises.Count() > 0)
                     throw new ExerciseTypeAlreadyExists();
 
@@ -51,7 +55,11 @@ namespace TMP.BLL.Services.Exercise
             if (exercise == null || string.IsNullOrEmpty(exercise.ExerciseName)) return false;
             using(var repo = new ExerciseTypeRepository(_dbKey))
             {
-                var matcingExercises = repo.Find(dbExc => dbExc.ExerciseName.Equals(exercise.ExerciseName.Trim(), StringComparison.OrdinalIgnoreCase));
+                var matcingExercises = repo.Find(dbExc => 
+                    dbExc.ExerciseName.Equals(exercise.ExerciseName.Trim(), StringComparison.OrdinalIgnoreCase)
+                    &&
+                    dbExc.MetricType == exercise.MetricType
+                    );
                 if (matcingExercises != null && matcingExercises.Count() > 0)
                     return true;
             }

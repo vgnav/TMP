@@ -13,7 +13,7 @@ namespace TMP.Controllers
         public ActionResult Index()
         {
             var service = new ExerciseTypeService(Common.Constants.Database.DBKey);
-            var exerciseTypes = service.GetAll();
+            var exerciseTypes = service.GetAll();            
             return View(exerciseTypes);
         }
 

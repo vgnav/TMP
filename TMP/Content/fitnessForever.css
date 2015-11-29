@@ -1,0 +1,226 @@
+@font-face {
+	font-family: "FitnessForever";
+	src: url("../fonts/fitnessForever/fitnessForever.eot");
+	src: url("../fonts/fitnessForever/fitnessForever.eot#iefix") format("embedded-opentype"),
+	url("../fonts/fitnessForever/fitnessForever.woff") format("woff"),
+	url("../fonts/fitnessForever/fitnessForever.ttf") format("truetype"),
+	url("../fonts/fitnessForever/fitnessForever.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="fitnessForever-"]:before, [class*=" fitnessForever-"]:before,
+[class^="fitnessForever-"]:after, [class*=" fitnessForever-"]:after {   
+	font-family: FitnessForever;
+    font-size: 20px;
+    font-style: normal;
+
+}.fitnessForever-apple63:before {
+	content: "\e000";
+}
+.fitnessForever-apple64:before {
+	content: "\e001";
+}
+.fitnessForever-bald37:before {
+	content: "\e002";
+}
+.fitnessForever-ball23:before {
+	content: "\e003";
+}
+.fitnessForever-band13:before {
+	content: "\e004";
+}
+.fitnessForever-bicycle14:before {
+	content: "\e005";
+}
+.fitnessForever-bike15:before {
+	content: "\e006";
+}
+.fitnessForever-break1:before {
+	content: "\e007";
+}
+.fitnessForever-burger10:before {
+	content: "\e008";
+}
+.fitnessForever-calendar146:before {
+	content: "\e009";
+}
+.fitnessForever-carrot8:before {
+	content: "\e00a";
+}
+.fitnessForever-chronometer19:before {
+	content: "\e00b";
+}
+.fitnessForever-chronometer20:before {
+	content: "\e00c";
+}
+.fitnessForever-cross85:before {
+	content: "\e00d";
+}
+.fitnessForever-date6:before {
+	content: "\e00e";
+}
+.fitnessForever-drugs6:before {
+	content: "\e00f";
+}
+.fitnessForever-dumbbell24:before {
+	content: "\e010";
+}
+.fitnessForever-dumbbells2:before {
+	content: "\e011";
+}
+.fitnessForever-dumbbells3:before {
+	content: "\e012";
+}
+.fitnessForever-file73:before {
+	content: "\e013";
+}
+.fitnessForever-first41:before {
+	content: "\e014";
+}
+.fitnessForever-fitness:before {
+	content: "\e015";
+}
+.fitnessForever-flexions:before {
+	content: "\e016";
+}
+.fitnessForever-gloves5:before {
+	content: "\e017";
+}
+.fitnessForever-hanging14:before {
+	content: "\e018";
+}
+.fitnessForever-healthy7:before {
+	content: "\e019";
+}
+.fitnessForever-heart285:before {
+	content: "\e01a";
+}
+.fitnessForever-heart286:before {
+	content: "\e01b";
+}
+.fitnessForever-heart287:before {
+	content: "\e01c";
+}
+.fitnessForever-heart288:before {
+	content: "\e01d";
+}
+.fitnessForever-kickboxing1:before {
+	content: "\e01e";
+}
+.fitnessForever-man428:before {
+	content: "\e01f";
+}
+.fitnessForever-man429:before {
+	content: "\e020";
+}
+.fitnessForever-medical85:before {
+	content: "\e021";
+}
+.fitnessForever-medical86:before {
+	content: "\e022";
+}
+.fitnessForever-medical87:before {
+	content: "\e023";
+}
+.fitnessForever-meter7:before {
+	content: "\e024";
+}
+.fitnessForever-musculous:before {
+	content: "\e025";
+}
+.fitnessForever-music224:before {
+	content: "\e026";
+}
+.fitnessForever-musical103:before {
+	content: "\e027";
+}
+.fitnessForever-musical104:before {
+	content: "\e028";
+}
+.fitnessForever-no67:before {
+	content: "\e029";
+}
+.fitnessForever-notes24:before {
+	content: "\e02a";
+}
+.fitnessForever-oxygenation:before {
+	content: "\e02b";
+}
+.fitnessForever-pencil88:before {
+	content: "\e02c";
+}
+.fitnessForever-restaurant44:before {
+	content: "\e02d";
+}
+.fitnessForever-resting5:before {
+	content: "\e02e";
+}
+.fitnessForever-runer:before {
+	content: "\e02f";
+}
+.fitnessForever-sauce3:before {
+	content: "\e030";
+}
+.fitnessForever-scale16:before {
+	content: "\e031";
+}
+.fitnessForever-scale17:before {
+	content: "\e032";
+}
+.fitnessForever-skating3:before {
+	content: "\e033";
+}
+.fitnessForever-sportive57:before {
+	content: "\e034";
+}
+.fitnessForever-standing92:before {
+	content: "\e035";
+}
+.fitnessForever-star157:before {
+	content: "\e036";
+}
+.fitnessForever-steroids1:before {
+	content: "\e037";
+}
+.fitnessForever-sunrise4:before {
+	content: "\e038";
+}
+.fitnessForever-swimming22:before {
+	content: "\e039";
+}
+.fitnessForever-thin37:before {
+	content: "\e03a";
+}
+.fitnessForever-thumb42:before {
+	content: "\e03b";
+}
+.fitnessForever-trophy56:before {
+	content: "\e03c";
+}
+.fitnessForever-truck38:before {
+	content: "\e03d";
+}
+.fitnessForever-two328:before {
+	content: "\e03e";
+}
+.fitnessForever-water53:before {
+	content: "\e03f";
+}
+.fitnessForever-weightlifter1:before {
+	content: "\e040";
+}
+.fitnessForever-weightlifter2:before {
+	content: "\e041";
+}
+.fitnessForever-weightlifter3:before {
+	content: "\e042";
+}
+.fitnessForever-wine57:before {
+	content: "\e043";
+}
+.fitnessForever-yin6:before {
+	content: "\e044";
+}
+.fitnessForever-yoga13:before {
+	content: "\e045";
+}

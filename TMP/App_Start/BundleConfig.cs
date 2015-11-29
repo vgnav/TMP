@@ -32,6 +32,7 @@ namespace TMP
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/fitnessForever.css",
                       "~/Content/remodal.css",
                       "~/Content/remodal-default-theme.css",
                       "~/Content/toastr.min.css",

@@ -6,7 +6,7 @@
         var _initialised = false, app = {}, _model, _tracker;
         var config = {
             validWorkoutName: 'This workout does not exist yet!',
-            workoutExists: 'This workout already exists, please use another name',
+            workoutExists: 'This workout already exists, please use another name or type',
             addUrl: '/ExerciseTypes/Add',
             isValidUrl: '/ExerciseTypes/IsValid',
             workoutAdded: 'Added new workout type!',
@@ -89,7 +89,6 @@
             self.errors = ko.validation.group(self);
 
             self.exerciseName.extend({ required: { params: true, message: config.workoutNameRequired } });
-            self.exerciseName.extend({ validateExerciseName: self });
 
             self.metricType.extend({
                 validation: {
@@ -101,11 +100,13 @@
                             return self.metricType() == 'rep' || self.metricType() == 'weight';
                         return false;
                     }
-                }
+                },
+                validateExerciseName: self
             });
+            // self.exerciseName.extend({  });
 
             self.isValidating = ko.computed(function () {
-                return self.exerciseName.isValidating();
+                return self.metricType.isValidating();
             });            
         };
 
